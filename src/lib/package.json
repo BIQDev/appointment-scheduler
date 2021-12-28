@@ -1,8 +1,8 @@
 {
-    "name": "@biqdev/ng-helper",
-    "version": "0.0.5",
+    "name": "@biqdev/appointment-scheduler",
+    "version": "0.0.2",
     "license": "(ISC OR GPL-3.0)",
-    "repository": "github:BIQDev/ng-helper",
+    "repository": "github:BIQDev/appointment-scheduler.git",
     "ngPackage": {
         "lib": {
             "entryFile": "public_api.ts"
@@ -10,7 +10,6 @@
         "dest": "../../dist"
     },
     "peerDependencies": {
-        "@angular/core": "~8.2.14",
-        "moment": "~2.29.1"
+        "@angular/core": "~8.2.14"
     }
 }

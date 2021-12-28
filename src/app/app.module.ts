@@ -4,13 +4,20 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import {AppointmentSchedulerModule} from '@biqdev/appointment-scheduler';
+import { DemoComponent } from './demo/demo.component';
+import { HomeComponent } from './home/home.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DemoComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AppointmentSchedulerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
