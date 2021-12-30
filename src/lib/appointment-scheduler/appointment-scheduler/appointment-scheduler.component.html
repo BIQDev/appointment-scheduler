@@ -1,1 +1,51 @@
-<p>appointment-scheduler works!</p>
+<div class="biq-appointment-scheduler d-flex flex-column align-items-stretch">
+
+    <div class="biq-appointment-scheduler__toolbar d-flex justify-content-around py-3">
+
+        <div class="person">
+            <select class="custom-select custom-select-sm" [(ngModel)]="personSelected" [disabled]="getConfig().personSelectDisabled">
+                <option *ngIf="getConfig().personAllShow" [ngValue]="-1">All</option>
+                <option *ngFor="let person of personList" [ngValue]="person.id">{{person.label}}</option>
+              </select>
+        </div>
+
+        <div class="view-date">
+
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <button class="btn btn-sm btn-secondary">
+                        <fa-icon [icon]="faChevronLeft"></fa-icon>
+                    </button>
+                </div>
+
+                <input type="text" class="form-control biq-readonly-datepicker"
+                    aria-label="Sizing example input"
+                    placeholder="Select Date"
+                    [readonly]="true"
+                    bsDatepicker>
+
+
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-secondary">
+                        <fa-icon [icon]="faChevronRight"></fa-icon>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="action">
+            <button class="btn btn-primary btn-sm" (click)="doSomething()">New Appointment</button>
+        </div>
+
+    </div>
+
+    <div class="biq-appointment-scheduler__main">
+        <biq-hours-panel></biq-hours-panel>
+        <div class="appointment-table">
+
+        </div>
+    </div>
+
+</div>

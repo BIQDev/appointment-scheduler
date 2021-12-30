@@ -1,0 +1,17 @@
+.biq-appointment-scheduler {
+    &__toolbar {
+        input.biq-readonly-datepicker[readonly] {
+            background-color: #ffffff;
+            text-align: center;
+        }
+    }
+
+    &__main {
+        display: flex;
+
+        .appointment-table {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+    }
+}
