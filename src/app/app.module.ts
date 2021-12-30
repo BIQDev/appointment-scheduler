@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {AppointmentSchedulerModule} from '@biqdev/appointment-scheduler';
 import { DemoComponent } from './demo/demo.component';
 import { HomeComponent } from './home/home.component';
+
+import {AppointmentSchedulerModule} from './appointment-scheduler/appointment-scheduler.module';
 
 @NgModule({
   declarations: [
