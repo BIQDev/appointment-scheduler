@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { DemoComponent } from './demo/demo.component';
 import { HomeComponent } from './home/home.component';
 
-import {AppointmentSchedulerModule} from './appointment-scheduler/appointment-scheduler.module';
+import {AppointmentSchedulerModule} from '@biqdev/appointment-scheduler';
+import { DemoInternalModule } from './demo-internal/demo-internal.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {AppointmentSchedulerModule} from './appointment-scheduler/appointment-sc
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppointmentSchedulerModule
+    AppointmentSchedulerModule,
+    DemoInternalModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

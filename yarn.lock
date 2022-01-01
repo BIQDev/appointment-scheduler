@@ -941,10 +941,10 @@
     "@babel/helper-validator-identifier" "^7.15.7"
     to-fast-properties "^2.0.0"
 
-"@biqdev/appointment-scheduler@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@biqdev/appointment-scheduler/-/appointment-scheduler-0.0.2.tgz#9970340d5a583920999dae6d7a007a11f3f9fac5"
-  integrity sha512-ZlsJQdx9sVb3h8/v3QAeZE/yePrGHp0N7Snv3g1/lIcpkJagUAPEokOMHOEJww823DNwwzxMO2WIGvtWvrKyag==
+"@biqdev/appointment-scheduler@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@biqdev/appointment-scheduler/-/appointment-scheduler-0.0.3.tgz#5aad5e531fb2eba867c1ef92c948993a8e838ebf"
+  integrity sha512-+fPbr0jMZHdjRU2NPN4lhtEAeV6bXMBWV/kI/dqtVn913dHtxjeCh4Z0dSNaMxgk76i/lqtSkahFXIIxCJQtHQ==
   dependencies:
     tslib "^1.9.0"
 
@@ -4197,6 +4197,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   version "4.2.8"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
+
+gsap@^3.9.1:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.9.1.tgz#d4c7443540497afee9ddc0824fd0180224e33360"
+  integrity sha512-JSGVYoC6da4pIjdF/yxFU6Rz8OojOIDkbooveZlfNg0+JIoFoRruyfWAEi6R/gUeNcuOiTqUIb0gi1nCNrHf8w==
 
 handle-thing@^2.0.0:
   version "2.0.1"

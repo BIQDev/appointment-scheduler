@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
+import { BiqAppointmentPersonModel } from './appointment-scheduler.model';
 
 @Injectable()
 export class AppointmentSchedulerService {
 
+    personList:Array<BiqAppointmentPersonModel> = [];
 
     hours:Array<string> = [];
 
     constructor() {
         this.hours = this.genHours();
+    }
+
+    setPersonList(personList: Array<BiqAppointmentPersonModel>) {
+        this.personList = Object.assign({}, personList);
+    }
+
+    getPersonList(): Array<BiqAppointmentPersonModel> {
+        return this.personList;
     }
 
     genHours(start: number = 8, interval: number = 30, language = 'en'): Array<string> {

@@ -1,6 +1,6 @@
 <div class="biq-hours-panel bg-light">
-    <div class="hour-item" *ngFor="let hour of service.hours; let first = first;"
-        [ngClass]="{ 'hour-item--first': first }">
+    <div class="hour-header"></div>
+    <div class="hour-item" *ngFor="let hour of service.hours">
         <div class="hour-item__start">{{hour | biqStrReplace:':00':'' | lowercase}}</div>
         <div class="hour-item__15minutes"></div>
     </div>

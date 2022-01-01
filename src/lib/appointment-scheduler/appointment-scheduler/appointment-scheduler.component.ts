@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import { AppointmentSchedulerService } from '../appointment-scheduler.service';
-import { BiqAppointmentConfigModel, PersonModel } from './appointment-scheduler.model';
+import { BiqAppointmentConfigModel, BiqAppointmentPersonModel } from '../appointment-scheduler.model';
 
 const biqAppointmentConfigDefault: BiqAppointmentConfigModel = {
   personSelectDisabled: false
@@ -16,23 +16,24 @@ const biqAppointmentConfigDefault: BiqAppointmentConfigModel = {
 export class AppointmentSchedulerComponent implements OnInit {
 
   @Input() biqAppointmentConfig: BiqAppointmentConfigModel = Object.assign({}, biqAppointmentConfigDefault);
+  @Input() personList: Array<BiqAppointmentPersonModel>;
 
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
 
-  personList:Array<PersonModel> = [
-    {id: 1, label: 'Bayu'},
-    {id: 2, label: 'Candra'}
-  ];
+  personSelected: number;
 
-  personSelected: number = this.personList[0].id;
-
-  constructor(service: AppointmentSchedulerService) { }
+  constructor(private service: AppointmentSchedulerService) { }
 
   ngOnInit() {
     if ( this.getConfig().personAllShow ) {
       this.personSelected = -1;
+    } else {
+      this.personSelected = this.service.personList[0].id;
     }
+
+    this.service.setPersonList(this.personList);
+
   }
 
   getConfig(): BiqAppointmentConfigModel {

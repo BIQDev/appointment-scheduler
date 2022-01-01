@@ -1,0 +1,30 @@
+@import '../assets/scss/vars';
+
+.biq-person-appointment {
+    min-width: 150px;
+
+
+    &__header {
+        position: relative;
+        height: $row-header-height;
+        border: 0.5px solid $table-border-color;
+        border-width: 0.5px 0.5px 0.5px 0;
+
+        .col-resize-handle {
+            position: absolute;
+            // top: 0; right: 0; bottom: 0;
+            width: 0; height: 0;
+            margin-left: -2px;
+            margin-top: -$row-header-height;
+            cursor: pointer;
+            cursor: e-resize;
+            border-width: 0 0 $row-header-height 2px;
+            border-style: solid;
+            border-color: transparent;
+            &:hover, &.is-active {
+                border-color: cornflowerblue;
+            }
+        }
+    }
+
+}

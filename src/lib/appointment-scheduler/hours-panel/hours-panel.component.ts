@@ -9,7 +9,7 @@ import { AppointmentSchedulerService } from '../appointment-scheduler.service';
 export class HoursPanelComponent implements OnInit {
 
   constructor(
-    private service: AppointmentSchedulerService
+    public service: AppointmentSchedulerService
   ) { }
 
   ngOnInit() {
