@@ -1,10 +1,11 @@
-export interface BiqAppointmentPersonModel {
+export interface AppointmentPersonModel {
     id: any;
-    label: string;
+    name: string;
     avatar?: string;
 }
 
-export interface BiqAppointmentConfigModel {
+export interface AppointmentConfigModel {
     personAllShow?: boolean;
     personSelectDisabled?: boolean;
+    containerHeight?: string;
 }

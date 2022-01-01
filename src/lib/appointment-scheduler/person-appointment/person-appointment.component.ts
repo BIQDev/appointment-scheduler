@@ -1,6 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
+import { AppointmentSchedulerService } from '../appointment-scheduler.service';
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
+import { AppointmentPersonModel } from '../appointment-scheduler.model';
+
+import {faUser} from '@fortawesome/free-solid-svg-icons';
 
 gsap.registerPlugin(Draggable);
 
@@ -10,11 +14,16 @@ gsap.registerPlugin(Draggable);
   styleUrls: ['./person-appointment.component.scss']
 })
 export class PersonAppointmentComponent implements OnInit {
+  @Input() personRecord: AppointmentPersonModel;
 
   @ViewChild('biqPersonAppointment', { static: true })
   public biqPersonAppointment: ElementRef;
 
-  constructor() {
+  faUser = faUser;
+
+  constructor(
+    public service: AppointmentSchedulerService
+  ) {
   }
 
   ngOnInit() {
@@ -22,7 +31,7 @@ export class PersonAppointmentComponent implements OnInit {
     let handle = this.biqPersonAppointment.nativeElement.querySelector('.col-resize-handle');
 
     let colRect = colEl.getBoundingClientRect();
-    gsap.set(handle, { x: colRect.width, y: colRect.height });
+    gsap.set(handle, { x: colRect.width, y: 0 });
 
     Draggable.create(handle, {
       autoScroll: 1,
@@ -40,7 +49,7 @@ export class PersonAppointmentComponent implements OnInit {
         handle.classList.remove('is-active');
         
         let colRect = colEl.getBoundingClientRect();
-        gsap.set(handle, { x: colRect.width, y: colRect.height });
+        gsap.set(handle, { x: colRect.width, y: 0 });
       }
     });
   }

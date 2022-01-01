@@ -8,6 +8,7 @@ import { DemoComponent } from './demo/demo.component';
 import { HomeComponent } from './home/home.component';
 
 import {AppointmentSchedulerModule} from '@biqdev/appointment-scheduler';
+//TODO: Comment demo interal things
 import { DemoInternalModule } from './demo-internal/demo-internal.module';
 
 @NgModule({

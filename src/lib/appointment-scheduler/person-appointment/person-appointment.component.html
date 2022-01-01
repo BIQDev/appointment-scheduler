@@ -1,6 +1,20 @@
 <div #biqPersonAppointment class="biq-person-appointment">
+    
     <div class="biq-person-appointment__header">
+        <div class=person-label>
+            <div class="person-label__avatar">
+                <fa-icon [icon]="faUser" class="text-white"></fa-icon>
+            </div>
+            <div class="person-label__name">{{personRecord.name}}</div>
+        </div>
         <div class="col-resize-handle"></div>
     </div>
-    <div class="biq-person-appointment__record"></div>
+
+    <div class="biq-person-appointment__record">
+        <div class="hour-item" *ngFor="let hour of service.hours">
+            <div class="hour-item__start"></div>
+            <div class="hour-item__15minutes"></div>
+        </div>
+    </div>
+
 </div>

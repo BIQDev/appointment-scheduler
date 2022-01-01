@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BiqAppointmentPersonModel } from 'src/app/appointment-scheduler/appointment-scheduler.model';
+import { AppointmentPersonModel } from '../../appointment-scheduler/appointment-scheduler.model';
 
 @Component({
   selector: 'app-demo-internal',
@@ -7,9 +7,9 @@ import { BiqAppointmentPersonModel } from 'src/app/appointment-scheduler/appoint
   styleUrls: ['./demo-internal.component.scss']
 })
 export class DemoInternalComponent implements OnInit {
-  personList: Array<BiqAppointmentPersonModel> = [
-    {id: 1, label: 'Bayu'},
-    {id: 2, label: 'Candra'}
+  personList: Array<AppointmentPersonModel> = [
+    {id: 1, name: 'Bayu'},
+    {id: 2, name: 'Candra'}
   ];
 
   constructor() { }

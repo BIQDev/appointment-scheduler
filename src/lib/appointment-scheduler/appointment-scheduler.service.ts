@@ -1,22 +1,36 @@
 import { Injectable } from '@angular/core';
-import { BiqAppointmentPersonModel } from './appointment-scheduler.model';
+import { AppointmentConfigModel, AppointmentPersonModel } from './appointment-scheduler.model';
+
+const appointmentConfigDefault: AppointmentConfigModel = {
+    personSelectDisabled: false
+}
 
 @Injectable()
 export class AppointmentSchedulerService {
 
-    personList:Array<BiqAppointmentPersonModel> = [];
+    appointmentConfig: AppointmentConfigModel;
 
-    hours:Array<string> = [];
+    personList: Array<AppointmentPersonModel> = [];
+
+    hours: Array<string> = [];
 
     constructor() {
         this.hours = this.genHours();
     }
 
-    setPersonList(personList: Array<BiqAppointmentPersonModel>) {
+    getConfig(): AppointmentConfigModel {
+        return Object.assign({}, appointmentConfigDefault, this.appointmentConfig);
+    }
+
+    setConfig( config: AppointmentConfigModel ) {
+        this.appointmentConfig = Object.assign({}, config);
+    }
+
+    setPersonList(personList: Array<AppointmentPersonModel>) {
         this.personList = Object.assign({}, personList);
     }
 
-    getPersonList(): Array<BiqAppointmentPersonModel> {
+    getPersonList(): Array<AppointmentPersonModel> {
         return this.personList;
     }
 
@@ -27,13 +41,13 @@ export class AppointmentSchedulerService {
             hour: 'numeric',
             minute: 'numeric',
         };
-    
+
         for (let minutes = 0; minutes < 24 * 60; minutes = minutes + interval) {
             date.setHours(0);
             date.setMinutes(minutes + (start * 60));
             ranges.push(date.toLocaleTimeString(language, format));
         }
-    
+
         return ranges;
     }
 
