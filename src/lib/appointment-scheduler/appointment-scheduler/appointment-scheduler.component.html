@@ -41,13 +41,15 @@
 
     </div>
 
-    <div class="biq-appointment-scheduler__main">
+    <div #appointmentTableSection class="biq-appointment-scheduler__table" [ngStyle]="{'height': service.getConfig().tableHeight ? service.getConfig().tableHeight : 'auto' }">
         <biq-hours-panel></biq-hours-panel>
-        <div class="appointment-table">
-            <biq-person-appointment
-                *ngFor="let person of personList"
-                [personRecord]="person">
-            </biq-person-appointment>
+        <div class="appointment-table-container">
+            <div class="appointment-table">
+                <biq-person-appointment
+                    *ngFor="let person of personList"
+                    [personRecord]="person">
+                </biq-person-appointment>
+            </div>
         </div>
     </div>
 

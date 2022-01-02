@@ -7,5 +7,5 @@ export interface AppointmentPersonModel {
 export interface AppointmentConfigModel {
     personAllShow?: boolean;
     personSelectDisabled?: boolean;
-    containerHeight?: string;
+    tableHeight?: string;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import { AppointmentSchedulerService } from '../appointment-scheduler.service';
 import { AppointmentConfigModel, AppointmentPersonModel } from '../appointment-scheduler.model';
@@ -13,6 +13,9 @@ export class AppointmentSchedulerComponent implements OnInit {
 
   @Input() appointmentConfig: AppointmentConfigModel;
   @Input() personList: Array<AppointmentPersonModel>;
+
+  @ViewChild('appointmentTableSection', {static: true})
+  appointmentTableSection;
 
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
@@ -33,6 +36,16 @@ export class AppointmentSchedulerComponent implements OnInit {
 
     this.service.setPersonList(this.personList);
 
+    this.syncScroll();
+
+  }
+
+  syncScroll() {
+    let hoursPanelEl = this.appointmentTableSection.nativeElement.querySelector('.biq-hours-panel');
+    let tableContainerEl = this.appointmentTableSection.nativeElement.querySelector('.appointment-table-container');
+    tableContainerEl.addEventListener('scroll', (e) => {
+      hoursPanelEl.scrollTop = e.target.scrollTop;
+    });
   }
 
   doSomething() {

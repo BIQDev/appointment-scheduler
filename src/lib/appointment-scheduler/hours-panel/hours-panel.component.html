@@ -1,4 +1,4 @@
-<div class="biq-hours-panel bg-light">
+<div #biqHoursPanel class="biq-hours-panel bg-light">
     <div class="hour-header"></div>
     <div class="hour-item" *ngFor="let hour of service.hours">
         <div class="hour-item__start">{{hour | biqStrReplace:':00':'' | lowercase}}</div>

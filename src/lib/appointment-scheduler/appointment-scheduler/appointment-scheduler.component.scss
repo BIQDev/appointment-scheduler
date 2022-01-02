@@ -1,3 +1,5 @@
+@import "../assets/scss/vars";
+
 .biq-appointment-scheduler {
     &__toolbar {
         input.biq-readonly-datepicker[readonly] {
@@ -6,13 +8,21 @@
         }
     }
 
-    &__main {
+    &__table {
         display: flex;
+        overflow: hidden;
 
-        .appointment-table {
-            display: flex;
+        .appointment-table-container {
+            position: relative;
             flex: 1 1 auto;
             min-width: 0;
+            overflow: auto;
+
+
+            .appointment-table{
+                display: flex;
+            }
+
         }
     }
 }

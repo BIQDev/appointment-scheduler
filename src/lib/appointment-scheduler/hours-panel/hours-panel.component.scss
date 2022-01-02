@@ -1,6 +1,14 @@
 @import '../assets/scss/vars';
 
 .biq-hours-panel {
+    flex: none;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: scroll;
+
+    > div {
+        box-sizing: border-box;
+    }
 
     .hour-header {
         height: $row-header-height;
@@ -26,7 +34,7 @@
         }
 
         &__start {
-
+            white-space: nowrap;
         }
 
         &__15minutes {
