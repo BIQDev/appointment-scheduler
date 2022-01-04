@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h5 class="modal-title pull-left">New Appointment</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <form class="form-group">
+        <label for="exampleInputEmail1">Purpose</label>
+        <select class="custom-select custom-select-sm">
+            <option>Please select purpose</option>
+            <option *ngFor="let purpose of list.purpose"
+                [ngValue]="purpose.value">
+                {{ purpose.label }}
+            </option>
+        </select>
+        <small id="emailHelp" class="form-text text-muted">Appointment purpose</small>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+</div>

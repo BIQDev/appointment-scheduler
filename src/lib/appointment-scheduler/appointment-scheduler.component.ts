@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import { AppointmentSchedulerService } from '../appointment-scheduler.service';
-import { AppointmentConfigModel, AppointmentPersonModel } from '../appointment-scheduler.model';
+import { AppointmentConfigModel, AppointmentModalConfigModel, AppointmentPersonModel } from '../appointment-scheduler.model';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AppointmentSchedulerModalComponent } from '../appointment-scheduler-modal/appointment-scheduler-modal.component';
 
 @Component({
   selector: 'biq-appointment-scheduler',
@@ -12,17 +14,23 @@ import { AppointmentConfigModel, AppointmentPersonModel } from '../appointment-s
 export class AppointmentSchedulerComponent implements OnInit {
 
   @Input() appointmentConfig: AppointmentConfigModel;
+  @Input() appointmentModalConfig: AppointmentModalConfigModel;
   @Input() personList: Array<AppointmentPersonModel>;
 
   @ViewChild('appointmentTableSection', {static: true})
   appointmentTableSection;
+
+  bsModalRef: BsModalRef;
 
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
 
   personSelected: number;
 
-  constructor(public service: AppointmentSchedulerService) { }
+  constructor(
+    public service: AppointmentSchedulerService,
+    private modalService: BsModalService,
+  ) { }
 
   ngOnInit() {
 
@@ -33,6 +41,8 @@ export class AppointmentSchedulerComponent implements OnInit {
     } else {
       this.personSelected = this.service.personList[0].id;
     }
+
+    this.service.setModalConfig( this.appointmentModalConfig );
 
     this.service.setPersonList(this.personList);
 
@@ -48,8 +58,13 @@ export class AppointmentSchedulerComponent implements OnInit {
     });
   }
 
-  doSomething() {
-    console.log(this.service.getConfig());
+  newAppointment() {
+    const initialState = {
+      list: this.service.getModalConfig()
+    }
+    console.log(initialState);
+    this.bsModalRef = this.modalService.show(AppointmentSchedulerModalComponent, {class: 'modal-lg modal-dialog-centered', initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
 }

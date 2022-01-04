@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppointmentConfigModel, AppointmentPersonModel } from './appointment-scheduler.model';
+import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel } from './appointment-scheduler.model';
 
 const appointmentConfigDefault: AppointmentConfigModel = {
     personSelectDisabled: false
@@ -9,6 +9,8 @@ const appointmentConfigDefault: AppointmentConfigModel = {
 export class AppointmentSchedulerService {
 
     appointmentConfig: AppointmentConfigModel;
+
+    appointmentConfigModal: AppointmentModalConfigModel;
 
     personList: Array<AppointmentPersonModel> = [];
 
@@ -24,6 +26,14 @@ export class AppointmentSchedulerService {
 
     setConfig( config: AppointmentConfigModel ) {
         this.appointmentConfig = Object.assign({}, config);
+    }
+
+    getModalConfig(): AppointmentModalConfigModel {
+        return Object.assign({}, this.appointmentConfigModal);
+    }
+
+    setModalConfig( config: AppointmentModalConfigModel ) {
+        this.appointmentConfigModal = Object.assign({}, config);
     }
 
     setPersonList(personList: Array<AppointmentPersonModel>) {

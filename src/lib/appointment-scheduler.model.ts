@@ -9,3 +9,7 @@ export interface AppointmentConfigModel {
     personSelectDisabled?: boolean;
     tableHeight?: string;
 }
+
+export interface AppointmentModalConfigModel {
+    purpose?: Array<{ value: any; label: any; }>;
+}
