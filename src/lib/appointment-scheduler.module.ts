@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentSchedulerComponent } from './appointment-scheduler/appointment-scheduler.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -20,7 +19,6 @@ import { PersonAppointmentComponent } from './person-appointment/person-appointm
   exports: [AppointmentSchedulerComponent],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     FormsModule, ReactiveFormsModule,
     FontAwesomeModule,
     BsDatepickerModule.forRoot(),

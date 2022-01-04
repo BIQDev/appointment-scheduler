@@ -1,6 +1,6 @@
 {
     "name": "@biqdev/appointment-scheduler",
-    "version": "0.0.4",
+    "version": "0.0.7",
     "license": "(ISC OR GPL-3.0)",
     "repository": "github:BIQDev/appointment-scheduler.git",
     "ngPackage": {
@@ -10,8 +10,15 @@
         "dest": "../../dist"
     },
     "peerDependencies": {
-        "@angular/core": "~8.2.14",
         "@angular/common": "~8.2.14",
-        "@angular/platform-browser": "~8.2.14"
+        "@angular/core": "~8.2.14",
+        "@angular/platform-browser": "~8.2.14",
+        "@fortawesome/angular-fontawesome": "~0.5.0",
+        "@fortawesome/fontawesome-svg-core": "^1.2.21",
+        "@fortawesome/free-solid-svg-icons": "^5.15.4",
+        "bootstrap": "4.6.1",
+        "gsap": "^3.9.1",
+        "moment": "2.22.2",
+        "ngx-bootstrap": "^5.5.0"
     }
 }

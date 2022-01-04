@@ -941,10 +941,10 @@
     "@babel/helper-validator-identifier" "^7.15.7"
     to-fast-properties "^2.0.0"
 
-"@biqdev/appointment-scheduler@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@biqdev/appointment-scheduler/-/appointment-scheduler-0.0.4.tgz#073d914fc3f09c8ca061d317910e525913ed9510"
-  integrity sha512-XPvGGOn2JQQwOWfFCG6MXSeTiq7QbDCmqXi3OZ+OZA5RKqEpmjmkoNIwzlu3+9/+A19ssG5fc6bT5kbZSXWlJQ==
+"@biqdev/appointment-scheduler@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@biqdev/appointment-scheduler/-/appointment-scheduler-0.0.6.tgz#87d76fac350e757f01d4b08e3d879ad4181a09d7"
+  integrity sha512-NpvdeVVL8+ScrPOPMxqRz5eBfA2Yt5NnQR1qceSi/T0Bdi+W9RlT1iTsbq52RwHs4rSa/xF3YKjS43+mr6E7FA==
   dependencies:
     tslib "^1.9.0"
 
@@ -5954,6 +5954,11 @@ mkdirp@^1.0.3, mkdirp@^1.0.4, mkdirp@~1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
+moment@2.22.2:
+  version "2.22.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
+  integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -6069,10 +6074,10 @@ ng-packagr@^5.1.0:
     terser "^4.1.2"
     update-notifier "^3.0.0"
 
-ngx-bootstrap@5.6.0:
-  version "5.6.0"
-  resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-5.6.0.tgz#79f2b13b3881c19936e4b2069e72befd582cfaef"
-  integrity sha512-/NZHenxMXPJim9axNQT4K0RIKi7xe1u7+wvByaoAVDiHM4com6HSYGoKawtLbspTU5vRqS+joYnn/Wv88td/nA==
+ngx-bootstrap@^5.5.0:
+  version "5.6.2"
+  resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-5.6.2.tgz#e648f826d303c29255c16772676efd30695740d1"
+  integrity sha512-6YHXtdXkGH3w0NQoaUgNYAcrj064Lv5RTO284ha/hvpNTrh55yQz2cVh0VvwBk3MjyY2tdmLH4SuCJDszYdYiw==
 
 nice-try@^1.0.4:
   version "1.0.5"

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppointmentSchedulerModule } from '../appointment-scheduler/appointment-scheduler.module';
+import { AppointmentSchedulerModule } from 'src/lib/appointment-scheduler.module';
 import { DemoInternalComponent } from './demo-internal/demo-internal.component';
 
 

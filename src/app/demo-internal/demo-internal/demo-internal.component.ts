@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentPersonModel } from '../../appointment-scheduler/appointment-scheduler.model';
+import { AppointmentPersonModel } from 'src/lib/appointment-scheduler.model';
 
 @Component({
   selector: 'app-demo-internal',

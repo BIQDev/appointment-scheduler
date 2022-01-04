@@ -1,7 +1,5 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-src/app/appointment-scheduler/
-
 # compiled output
 /dist
 /tmp
@@ -11,6 +9,7 @@ src/app/appointment-scheduler/
 
 # dependencies
 /node_modules
+/src/lib/node_modules
 
 # profiling files
 chrome-profiler-events*.json

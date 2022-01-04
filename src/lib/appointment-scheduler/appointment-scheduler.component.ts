@@ -22,7 +22,7 @@ export class AppointmentSchedulerComponent implements OnInit {
 
   personSelected: number;
 
-  constructor(private service: AppointmentSchedulerService) { }
+  constructor(public service: AppointmentSchedulerService) { }
 
   ngOnInit() {
 
