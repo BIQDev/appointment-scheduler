@@ -4,12 +4,12 @@ import { AppointmentSchedulerComponent } from './appointment-scheduler/appointme
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { getDatepickerConfig } from './bs-config';
 import { HoursPanelComponent } from './hours-panel/hours-panel.component';
 import { StrReplacePipe } from './pipes/str-replace.pipe';
 import { PersonAppointmentComponent } from './person-appointment/person-appointment.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -22,7 +22,10 @@ import { PersonAppointmentComponent } from './person-appointment/person-appointm
     FormsModule, ReactiveFormsModule,
     FontAwesomeModule,
     BsDatepickerModule.forRoot(),
+    ModalModule.forRoot()
   ],
-  providers: [{ provide: BsDatepickerConfig, useFactory: getDatepickerConfig }]
+  providers: [
+    { provide: BsDatepickerConfig, useFactory: getDatepickerConfig }
+  ]
 })
 export class AppointmentSchedulerModule { }
