@@ -941,10 +941,10 @@
     "@babel/helper-validator-identifier" "^7.15.7"
     to-fast-properties "^2.0.0"
 
-"@biqdev/appointment-scheduler@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@biqdev/appointment-scheduler/-/appointment-scheduler-0.0.6.tgz#87d76fac350e757f01d4b08e3d879ad4181a09d7"
-  integrity sha512-NpvdeVVL8+ScrPOPMxqRz5eBfA2Yt5NnQR1qceSi/T0Bdi+W9RlT1iTsbq52RwHs4rSa/xF3YKjS43+mr6E7FA==
+"@biqdev/appointment-scheduler@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@biqdev/appointment-scheduler/-/appointment-scheduler-0.0.8.tgz#a1fb30bdff85b9be6d9cf4ab42c5c7762a9a803e"
+  integrity sha512-ZJUJhz1SkKESLRjNPUSLAslYkaMwIv1w724+htLzc88f7p1gVhppC7tup9j0x7maAHkwEbctiAgoc+ox370hiQ==
   dependencies:
     tslib "^1.9.0"
 

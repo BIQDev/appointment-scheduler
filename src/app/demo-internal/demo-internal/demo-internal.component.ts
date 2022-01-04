@@ -23,8 +23,6 @@ export class DemoInternalComponent implements OnInit {
       { value: 'follow_up_patient', label: 'Follow up patient' },
       { value: 'other', label: 'Other' },
     ],
-    personLabel: 'Coach',
-    communicationDefaultIsEmail: true
   }
 
   personList: Array<AppointmentPersonModel> = [

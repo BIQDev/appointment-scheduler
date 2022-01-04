@@ -4,9 +4,11 @@ import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 import { TextPlugin } from "gsap/TextPlugin";
 import { AppointmentPersonModel } from '../appointment-scheduler.model';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
 
 import {faUser} from '@fortawesome/free-solid-svg-icons';
+
+const moment = moment_;
 
 gsap.registerPlugin(Draggable, TextPlugin);
 
