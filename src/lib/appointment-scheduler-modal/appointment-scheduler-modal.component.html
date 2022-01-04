@@ -1,24 +1,120 @@
-<div class="modal-header">
-    <h5 class="modal-title pull-left">New Appointment</h5>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<div style="display: flex; flex-direction: column; max-height: calc(100vh - 3.5rem);">
+    <div class="modal-header">
+        <h5 class="modal-title pull-left">New Appointment</h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
-<div class="modal-body">
-    <form class="form-group">
-        <label for="exampleInputEmail1">Purpose</label>
-        <select class="custom-select custom-select-sm">
-            <option>Please select purpose</option>
-            <option *ngFor="let purpose of list.purpose"
-                [ngValue]="purpose.value">
-                {{ purpose.label }}
-            </option>
-        </select>
-        <small id="emailHelp" class="form-text text-muted">Appointment purpose</small>
-    </form>
-</div>
+    <div class="modal-body">
 
-<div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+        <form [formGroup]="formAppointment">
+
+            <div class="form-group">
+                <label for="appointmentPurpose">Purpose <span class="text-danger">*</span></label>
+                <select class="custom-select custom-select-sm" id="appointmentPurpose" name="purpose">
+                    <option>Please select purpose</option>
+                    <option *ngFor="let purpose of list.purpose" [ngValue]="purpose.value">
+                        {{ purpose.label }}
+                    </option>
+                </select>
+                <!-- <small class="form-text text-muted">Appointment purpose</small> -->
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-6">
+                        <label for="appointmentDate">Date <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" id="appointmentDate" name="date" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-6">
+                        <label for="appointmentTime">Time <span class="text-danger">*</span></label>
+                        <select class="custom-select custom-select-sm" id="appointmentTime" name="time">
+                            <option>Please select time</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="appointmentDuration">Duration <span class="text-danger">*</span></label>
+                        <select class="custom-select custom-select-sm" id="appointmentDuration" name="duration">
+                            <option>Please select duration</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="appointmentPerson">{{ list.personLabel ? list.personLabel : 'Person' }} <span
+                        class="text-danger">*</span></label>
+                <select class="custom-select custom-select-sm" id="appointmentPerson" name="person">
+                    <option>Please select {{ (list.personLabel ? list.personLabel : 'Person') | lowercase }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-6">
+                        <label for="appointmentCallersName">Caller's name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="appointmentCallersName" name="callersName" />
+                    </div>
+                    <div class="col-6">
+                        <label for="appointmentCallersEmail">Caller's email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="appointmentCallersEmail" name="callersEmail" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-6">
+                        <label for="appointmentContactNo">Contact No <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="appointmentContactNo" name="contactNo" />
+                    </div>
+                    <div class="col-6">
+                        <label for="appointmentRelationship">Relationship to Patient <span
+                                class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="appointmentRelationship" name="relationship" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="modal-footer flex-nowrap justify-content-start m-0">
+        <div class="d-flex flex-fill">
+            <button type="button" class="btn btn-outline-secondary m-1" (click)="bsModalRef.hide()">
+                Cancel
+            </button>
+            <button type="button" class="btn btn-primary m-1">Send Invite</button>
+        </div>
+
+        <div class="d-flex">
+
+            <div class="custom-control custom-radio m-1">
+                <input type="radio"
+                    id="comunicationMethodEmail"
+                    name="comunicationMethod"
+                    class="custom-control-input"
+                    [checked]="list.communicationDefault === 'email'">
+                <label class="custom-control-label" for="comunicationMethodEmail">Email</label>
+            </div>
+            <div class="custom-control custom-radio m-1">
+                <input type="radio"
+                    id="comunicationMethodText"
+                    name="comunicationMethod"
+                    class="custom-control-input"
+                    [checked]="list.communicationDefault === 'text'">
+                <label class="custom-control-label" for="comunicationMethodText">Text</label>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>

@@ -12,4 +12,6 @@ export interface AppointmentConfigModel {
 
 export interface AppointmentModalConfigModel {
     purpose?: Array<{ value: any; label: any; }>;
+    personLabel?: string;
+    communicationDefault?: string;
 }

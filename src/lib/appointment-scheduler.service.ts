@@ -5,6 +5,11 @@ const appointmentConfigDefault: AppointmentConfigModel = {
     personSelectDisabled: false
 }
 
+const appointmentConfigModalDefault: AppointmentModalConfigModel = {
+    personLabel: 'Coach',
+    communicationDefault: 'email',
+}
+
 @Injectable()
 export class AppointmentSchedulerService {
 
@@ -29,7 +34,7 @@ export class AppointmentSchedulerService {
     }
 
     getModalConfig(): AppointmentModalConfigModel {
-        return Object.assign({}, this.appointmentConfigModal);
+        return Object.assign({}, appointmentConfigModalDefault, this.appointmentConfigModal);
     }
 
     setModalConfig( config: AppointmentModalConfigModel ) {

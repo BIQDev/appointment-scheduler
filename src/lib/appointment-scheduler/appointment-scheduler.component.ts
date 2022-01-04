@@ -62,8 +62,7 @@ export class AppointmentSchedulerComponent implements OnInit {
     const initialState = {
       list: this.service.getModalConfig()
     }
-    console.log(initialState);
-    this.bsModalRef = this.modalService.show(AppointmentSchedulerModalComponent, {class: 'modal-lg modal-dialog-centered', initialState});
+    this.bsModalRef = this.modalService.show(AppointmentSchedulerModalComponent, {class: 'modal-md modal-dialog-centered modal-dialog-scrollable', initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 

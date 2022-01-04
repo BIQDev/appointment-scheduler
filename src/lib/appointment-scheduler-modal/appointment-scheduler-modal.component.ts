@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppointmentModalConfigModel } from '../appointment-scheduler.model';
 
@@ -15,8 +16,13 @@ export class AppointmentSchedulerModalComponent implements OnInit {
 
   list: AppointmentModalConfigModel = {};
 
+  formAppointment = this.fb.group({
+    purpose: ['', [Validators.required]]
+  });
+
   constructor(
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit() {
