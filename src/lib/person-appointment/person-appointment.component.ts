@@ -68,13 +68,18 @@ export class PersonAppointmentComponent implements OnInit {
       hourMarkerEl.style.top = `${e.target.offsetTop - 80}px`;
     }
     e.target.dataset.biqIsHovered = 'true';
+
+    let timeout = 200;
+    if ( hourMarkerStyle.getPropertyValue('display') !== 'none' ) {
+      timeout = 0;
+    }
     setTimeout( () => {
       const isHovered = e.target.dataset.biqIsHovered === 'true';
       if ( isHovered ) {
         gsap.to(hourMarkerEl, { duration: 0.2, top: `${e.target.offsetTop}px`, text: date.format('LT')});
         gsap.to(hourMarkerEl, { duration: 0.4, autoAlpha: 1, display: 'flex'});
       }
-    }, 200);
+    }, timeout);
   }
 
   hourItemMouseLeave(e) {
