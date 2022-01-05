@@ -948,6 +948,13 @@
   dependencies:
     tslib "^1.9.0"
 
+"@biqdev/ng-helper@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@biqdev/ng-helper/-/ng-helper-0.0.5.tgz#7be28355586ecf086fd577bb51463b421f6385b5"
+  integrity sha512-lr3weqqH+d5wmiTyi2EjFDglHSF8v7HF4TvJSdtUHUOPxkact577vD7gV3addYBhfbDxUYws1dflvilANNsFjA==
+  dependencies:
+    tslib "^1.9.0"
+
 "@fortawesome/angular-fontawesome@~0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/angular-fontawesome/-/angular-fontawesome-0.5.0.tgz#5dbc01714b4af45a2ecb8dd63a6f8b462a8337e1"

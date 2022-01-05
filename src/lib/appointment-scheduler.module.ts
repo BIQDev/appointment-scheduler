@@ -12,13 +12,15 @@ import { AppointmentSchedulerComponent } from './appointment-scheduler/appointme
 import { HoursPanelComponent } from './hours-panel/hours-panel.component';
 import { PersonAppointmentComponent } from './person-appointment/person-appointment.component';
 import { AppointmentSchedulerModalComponent } from './appointment-scheduler-modal/appointment-scheduler-modal.component';
+import { BiqMomentPipe } from './pipes/biq-moment.pipe';
+import { BiqMinsToHoursPipe } from './pipes/mins-to-hours.pipe';
 
 
 @NgModule({
   declarations: [
     AppointmentSchedulerComponent, HoursPanelComponent,
     PersonAppointmentComponent, AppointmentSchedulerModalComponent,
-    StrReplacePipe,
+    StrReplacePipe, BiqMomentPipe, BiqMinsToHoursPipe,
   ],
   entryComponents: [AppointmentSchedulerModalComponent],
   exports: [AppointmentSchedulerComponent],

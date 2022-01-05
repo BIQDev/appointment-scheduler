@@ -17,7 +17,8 @@ export class AppointmentSchedulerModalComponent implements OnInit {
   list: AppointmentModalConfigModel = {};
 
   formAppointment = this.fb.group({
-    purpose: ['', [Validators.required]]
+    purpose: ['', [Validators.required]],
+    date: ['', [Validators.required]],
   });
 
   constructor(

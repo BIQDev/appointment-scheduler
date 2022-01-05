@@ -30,7 +30,7 @@ export class AppointmentSchedulerComponent implements OnInit {
   faChevronRight = faChevronRight;
 
   personSelected: number;
-  viewDate: Date = new Date();
+  appointmentDate: Date = new Date();
 
   constructor(
     public service: AppointmentSchedulerService,
@@ -64,18 +64,24 @@ export class AppointmentSchedulerComponent implements OnInit {
   }
 
   prevDate() {
-    let prevDate = moment(this.viewDate).subtract(1, 'day');
-    this.viewDate = prevDate.toDate();
+    let prevDate = moment(this.appointmentDate).subtract(1, 'day');
+    this.appointmentDate = prevDate.toDate();
   }
 
   nextDate() {
-    let nextDate = moment(this.viewDate).add(1, 'day');
-    this.viewDate = nextDate.toDate();
+    let nextDate = moment(this.appointmentDate).add(1, 'day');
+    this.appointmentDate = nextDate.toDate();
   }
 
   newAppointment() {
     const initialState = {
-      list: this.service.getModalConfig()
+      list: Object.assign(
+        {},
+        this.service.getModalConfig(),
+        {
+          appointmentDate: this.appointmentDate
+        }
+      )
     }
     this.bsModalRef = this.modalService.show(AppointmentSchedulerModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable', initialState });
     this.bsModalRef.content.closeBtnName = 'Close';

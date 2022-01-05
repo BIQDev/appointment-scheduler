@@ -20,24 +20,34 @@ export class AppointmentSchedulerService {
     personList: Array<AppointmentPersonModel> = [];
 
     hours: Array<string> = [];
+    durations: Array<number> = [];
 
     constructor() {
         this.hours = this.genHours();
+        this.durations = this.genDurations();
     }
 
     getConfig(): AppointmentConfigModel {
         return Object.assign({}, appointmentConfigDefault, this.appointmentConfig);
     }
 
-    setConfig( config: AppointmentConfigModel ) {
+    setConfig(config: AppointmentConfigModel) {
         this.appointmentConfig = Object.assign({}, config);
     }
 
     getModalConfig(): AppointmentModalConfigModel {
-        return Object.assign({}, appointmentConfigModalDefault, this.appointmentConfigModal);
+        return Object.assign(
+            {},
+            appointmentConfigModalDefault,
+            this.appointmentConfigModal,
+            {
+                hours: this.getHours(),
+                durations: this.getDurations()
+            }
+        );
     }
 
-    setModalConfig( config: AppointmentModalConfigModel ) {
+    setModalConfig(config: AppointmentModalConfigModel) {
         this.appointmentConfigModal = Object.assign({}, config);
     }
 
@@ -47,6 +57,14 @@ export class AppointmentSchedulerService {
 
     getPersonList(): Array<AppointmentPersonModel> {
         return this.personList;
+    }
+
+    genDurations(): Array<number> {
+        return [30, 45, 60, 75, 90];
+    }
+
+    getDurations(): Array<number> {
+        return this.durations;
     }
 
     genHours(start: number = 8, interval: number = 30, language = 'en'): Array<string> {
@@ -64,6 +82,10 @@ export class AppointmentSchedulerService {
         }
 
         return ranges;
+    }
+
+    getHours() {
+        return this.hours;
     }
 
 }

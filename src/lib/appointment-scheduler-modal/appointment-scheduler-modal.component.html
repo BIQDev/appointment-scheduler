@@ -23,9 +23,15 @@
 
             <div class="form-group">
                 <div class="form-row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <label for="appointmentDate">Date <span class="text-danger">*</span></label>
-                        <input class="form-control" type="text" id="appointmentDate" name="date" />
+                        <input class="form-control biq-readonly-datepicker" type="text"
+                            id="appointmentDate"
+                            formControlName="date"
+                            placeholder="Select Date"
+                            [readonly]="true"
+                            [(ngModel)]="list.appointmentDate"
+                            bsDatepicker/>
                     </div>
                 </div>
             </div>
@@ -36,12 +42,18 @@
                         <label for="appointmentTime">Time <span class="text-danger">*</span></label>
                         <select class="custom-select custom-select-sm" id="appointmentTime" name="time">
                             <option>Please select time</option>
+                            <option *ngFor="let hour of list.hours"
+                                [ngValue]="hour">{{hour}}</option>
                         </select>
                     </div>
                     <div class="col-6">
                         <label for="appointmentDuration">Duration <span class="text-danger">*</span></label>
                         <select class="custom-select custom-select-sm" id="appointmentDuration" name="duration">
                             <option>Please select duration</option>
+                            <option *ngFor="let duration of list.durations"
+                                [ngValue]="duration">
+                                {{duration | biqMinsToHours}}
+                            </option>
                         </select>
                     </div>
                 </div>
