@@ -13,19 +13,19 @@
 
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                    <button class="btn btn-sm btn-secondary">
+                    <button class="btn btn-sm btn-secondary" (click)="prevDate()">
                         <fa-icon [icon]="faChevronLeft"></fa-icon>
                     </button>
                 </div>
 
                 <input type="text" class="form-control biq-readonly-datepicker"
-                    aria-label="Sizing example input"
                     placeholder="Select Date"
                     [readonly]="true"
+                    [(ngModel)]="viewDate"
                     bsDatepicker>
 
 
-                <div class="input-group-append">
+                <div class="input-group-append" (click)="nextDate()">
                     <button class="btn btn-sm btn-secondary">
                         <fa-icon [icon]="faChevronRight"></fa-icon>
                     </button>
