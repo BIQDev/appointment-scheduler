@@ -42,7 +42,8 @@ export class AppointmentSchedulerService {
             this.appointmentConfigModal,
             {
                 hours: this.getHours(),
-                durations: this.getDurations()
+                durations: this.getDurations(),
+                persons: this.getPersonList(),
             }
         );
     }
@@ -52,7 +53,7 @@ export class AppointmentSchedulerService {
     }
 
     setPersonList(personList: Array<AppointmentPersonModel>) {
-        this.personList = Object.assign({}, personList);
+        this.personList = [].concat(personList);
     }
 
     getPersonList(): Array<AppointmentPersonModel> {

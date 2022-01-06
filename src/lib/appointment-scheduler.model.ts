@@ -13,6 +13,7 @@ export interface AppointmentConfigModel {
 export interface AppointmentModalConfigModel {
     purpose?: Array<{ value: any; label: any; }>;
     personLabel?: string;
+    persons?: Array<AppointmentPersonModel>;
     communicationDefault?: string;
     appointmentDate?: Date;
     hours?: Array<any>;

@@ -64,6 +64,10 @@
                         class="text-danger">*</span></label>
                 <select class="custom-select custom-select-sm" id="appointmentPerson" name="person">
                     <option>Please select {{ (list.personLabel ? list.personLabel : 'Person') | lowercase }}</option>
+                    <option *ngFor="let person of list.persons"
+                        [ngValue]="person.id">
+                        {{person.name}}
+                    </option>
                 </select>
             </div>
 
