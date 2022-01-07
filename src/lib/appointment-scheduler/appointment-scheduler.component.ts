@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 import { AppointmentSchedulerService } from '../appointment-scheduler.service';
-import { AppointmentConfigModel, AppointmentModalConfigModel, AppointmentPersonModel } from '../appointment-scheduler.model';
+import { AppointmentConfigModel, AppointmentModalConfigModel, AppointmentReadyModel } from '../appointment-scheduler.model';
 import { AppointmentSchedulerModalComponent } from '../appointment-scheduler-modal/appointment-scheduler-modal.component';
 
 @Component({
@@ -16,7 +16,7 @@ export class AppointmentSchedulerComponent implements OnInit {
 
   @Input() appointmentConfig: AppointmentConfigModel;
   @Input() appointmentModalConfig: AppointmentModalConfigModel;
-  @Input() personList: Array<AppointmentPersonModel>;
+  @Output() appointmentReady = new EventEmitter<AppointmentReadyModel>();
 
   @ViewChild('appointmentTableSection', { static: true })
   appointmentTableSection;
@@ -45,10 +45,11 @@ export class AppointmentSchedulerComponent implements OnInit {
 
     this.service.setModalConfig(this.appointmentModalConfig);
 
-    this.service.setPersonList(this.personList);
-
     this.syncScroll();
 
+    this.appointmentReady.emit({
+      service: this.service
+    });
   }
 
   syncScroll() {

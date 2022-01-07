@@ -35,7 +35,6 @@ export class AppointmentSchedulerModalComponent implements OnInit {
       this.formAppointment.controls.time.setValue(this.list.appointmentHour);
     }
     if ( !biqHelper.isNull(this.list.appointmentPerson) ) {
-      console.log(this.list.appointmentPerson);
       this.formAppointment.controls.person.setValue(this.list.appointmentPerson.id);
     }
   }

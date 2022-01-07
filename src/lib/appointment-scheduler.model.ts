@@ -1,3 +1,5 @@
+import { AppointmentSchedulerService } from "./appointment-scheduler.service";
+
 export interface AppointmentPersonModel {
     id: any;
     name: string;
@@ -20,4 +22,8 @@ export interface AppointmentModalConfigModel {
     appointmentPerson?: AppointmentPersonModel;
     hours?: Array<any>;
     durations?: Array<string>;//In minutes
+}
+
+export interface AppointmentReadyModel {
+    service: AppointmentSchedulerService
 }

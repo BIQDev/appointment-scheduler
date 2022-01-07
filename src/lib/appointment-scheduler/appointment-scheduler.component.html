@@ -5,7 +5,7 @@
         <div class="person">
             <select class="custom-select custom-select-sm" [(ngModel)]="personSelected" [disabled]="service.getConfig().personSelectDisabled">
                 <option *ngIf="service.getConfig().personAllShow" [ngValue]="-1">All</option>
-                <option *ngFor="let person of personList" [ngValue]="person.id">{{person.name}}</option>
+                <option *ngFor="let person of service.personList" [ngValue]="person.id">{{person.name}}</option>
               </select>
         </div>
 
@@ -47,7 +47,7 @@
         <div class="appointment-table-container">
             <div class="appointment-table">
                 <biq-person-appointment
-                    *ngFor="let person of personList"
+                    *ngFor="let person of service.personList"
                     [personRecord]="person">
                 </biq-person-appointment>
             </div>

@@ -2,6 +2,6 @@
     <biq-appointment-scheduler
         [appointmentConfig]="appointmentConfig"
         [appointmentModalConfig]="appointmentModalConfig"
-        [personList]="personList">
+        (appointmentReady)="appointmentReady($event)">
     </biq-appointment-scheduler>
 </div>

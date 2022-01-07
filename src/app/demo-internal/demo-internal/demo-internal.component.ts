@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppointmentSchedulerService } from '../../../lib/appointment-scheduler.service';
 import { AppointmentConfigModel, AppointmentModalConfigModel } from 'src/lib/appointment-scheduler.model';
 import { AppointmentPersonModel } from 'src/lib/appointment-scheduler.model';
 
@@ -14,6 +15,8 @@ export class DemoInternalComponent implements OnInit {
     tableHeight: '500px'
   };
 
+  appointmentService: AppointmentSchedulerService;
+
   appointmentModalConfig: AppointmentModalConfigModel = {
     purpose: [
       { value: 'meet_greet', label: 'Meet & Greet' },
@@ -25,21 +28,27 @@ export class DemoInternalComponent implements OnInit {
     ],
   }
 
-  personList: Array<AppointmentPersonModel> = [
-    {id: 1, name: 'Bayu Candra'},
-    {id: 2, name: 'Iis'},
-    {id: 3, name: 'Rio'},
-    {id: 4, name: 'Qia'},
-    {id: 5, name: 'Nifa'},
-    {id: 6, name: 'Ikhsan'},
-    {id: 7, name: 'Hafiz'},
-    {id: 8, name: 'Izar'},
-    {id: 9, name: 'Izar'},
-  ];
-
   constructor() { }
 
   ngOnInit() {
+    setTimeout(() => {
+      let personList: Array<AppointmentPersonModel> = [
+        { id: 1, name: 'Bayu Candra' },
+        { id: 2, name: 'Iis' },
+        { id: 3, name: 'Rio' },
+        { id: 4, name: 'Qia' },
+        { id: 5, name: 'Nifa' },
+        { id: 6, name: 'Ikhsan' },
+        { id: 7, name: 'Hafiz' },
+        { id: 8, name: 'Izar' },
+        { id: 9, name: 'Izar' },
+      ];
+      this.appointmentService.setPersonList(personList);
+    }, 2000);
+  }
+
+  appointmentReady(e) {
+    this.appointmentService = e.service;
   }
 
 }
