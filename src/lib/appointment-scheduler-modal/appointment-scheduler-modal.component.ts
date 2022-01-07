@@ -18,10 +18,15 @@ export class AppointmentSchedulerModalComponent implements OnInit {
   list: AppointmentModalConfigModel = {};
 
   formAppointment = this.fb.group({
-    purpose: ['', [Validators.required]],
+    purpose: [null, [Validators.required]],
     date: ['', [Validators.required]],
     time: [null, [Validators.required]],
-    person: [null, [Validators.required]]
+    duration: [null, [Validators.required]],
+    person: [null, [Validators.required]],
+    callersName: ['', [Validators.required]],
+    callersEmail: ['', [Validators.required]],
+    contactNo: ['', [Validators.required]],
+    relationship: ['', [Validators.required]],
   });
 
   constructor(

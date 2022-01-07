@@ -12,6 +12,18 @@ export interface AppointmentConfigModel {
     tableHeight?: string;
 }
 
+export interface AppointmentModalSubmitModel {
+    purpose: string;
+    date: string;
+    time: string;
+    duration: string;
+    personId: string;
+    callersName: string;
+    callersEmail: string;
+    contactNo: string;
+    relationShipToPatient: string;
+}
+
 export interface AppointmentModalConfigModel {
     purpose?: Array<{ value: any; label: any; }>;
     personLabel?: string;
@@ -22,6 +34,7 @@ export interface AppointmentModalConfigModel {
     appointmentPerson?: AppointmentPersonModel;
     hours?: Array<any>;
     durations?: Array<string>;//In minutes
+    submitCallback?: ( data: AppointmentModalSubmitModel ) => void;
 }
 
 export interface AppointmentReadyModel {

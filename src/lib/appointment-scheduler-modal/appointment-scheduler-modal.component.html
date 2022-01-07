@@ -15,8 +15,8 @@
                 <select class="custom-select custom-select-sm"
                     id="appointmentPurpose"
                     name="purpose"
-                    formArrayName="purpose">
-                    <option>Please select purpose</option>
+                    formControlName="purpose">
+                    <option [ngValue]="null" [disabled]="true">Please select purpose</option>
                     <option *ngFor="let purpose of list.purpose" [ngValue]="purpose.value">
                         {{ purpose.label }}
                     </option>
@@ -53,8 +53,11 @@
                     </div>
                     <div class="col-6">
                         <label for="appointmentDuration">Duration <span class="text-danger">*</span></label>
-                        <select class="custom-select custom-select-sm" id="appointmentDuration" name="duration">
-                            <option>Please select duration</option>
+                        <select class="custom-select custom-select-sm"
+                            id="appointmentDuration"
+                            name="duration"
+                            formControlName="duration">
+                            <option [ngValue]="null" [disabled]="true">Please select duration</option>
                             <option *ngFor="let duration of list.durations"
                                 [ngValue]="duration">
                                 {{duration | biqMinsToHours}}
@@ -71,7 +74,7 @@
                     id="appointmentPerson"
                     name="person"
                     formControlName="person">
-                    <option>Please select {{ (list.personLabel ? list.personLabel : 'Person') | lowercase }}</option>
+                    <option [ngValue]="null" [disabled]="true">Please select {{ (list.personLabel ? list.personLabel : 'Person') | lowercase }}</option>
                     <option *ngFor="let person of list.persons"
                         [ngValue]="person.id">
                         {{person.name}}
@@ -83,11 +86,15 @@
                 <div class="form-row">
                     <div class="col-6">
                         <label for="appointmentCallersName">Caller's name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="appointmentCallersName" name="callersName" />
+                        <input type="text" class="form-control" id="appointmentCallersName"
+                            name="callersName"
+                            formControlName="callersName"/>
                     </div>
                     <div class="col-6">
                         <label for="appointmentCallersEmail">Caller's email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" id="appointmentCallersEmail" name="callersEmail" />
+                        <input type="email" class="form-control" id="appointmentCallersEmail"
+                            name="callersEmail"
+                            formControlName="callersEmail"/>
                     </div>
                 </div>
             </div>
@@ -96,12 +103,16 @@
                 <div class="form-row">
                     <div class="col-6">
                         <label for="appointmentContactNo">Contact No <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="appointmentContactNo" name="contactNo" />
+                        <input type="text" class="form-control" id="appointmentContactNo"
+                            name="contactNo"
+                            formControlName="contactNo" />
                     </div>
                     <div class="col-6">
                         <label for="appointmentRelationship">Relationship to Patient <span
                                 class="text-danger">*</span></label>
-                        <input type="email" class="form-control" id="appointmentRelationship" name="relationship" />
+                        <input type="email" class="form-control" id="appointmentRelationship"
+                            name="relationship"
+                            formControlName="relationship" />
                     </div>
                 </div>
             </div>
