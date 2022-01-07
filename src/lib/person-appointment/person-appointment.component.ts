@@ -7,6 +7,8 @@ import { AppointmentPersonModel } from '../appointment-scheduler.model';
 import * as moment_ from 'moment';
 
 import {faUser} from '@fortawesome/free-solid-svg-icons';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AppointmentSchedulerModalComponent } from '../appointment-scheduler-modal/appointment-scheduler-modal.component';
 
 const moment = moment_;
 
@@ -23,10 +25,13 @@ export class PersonAppointmentComponent implements OnInit {
   @ViewChild('biqPersonAppointmentEl', { static: true })
   public biqPersonAppointmentEl: ElementRef;
 
+  bsModalRef: BsModalRef;
+
   faUser = faUser;
 
   constructor(
-    public service: AppointmentSchedulerService
+    public service: AppointmentSchedulerService,
+    private modalService: BsModalService,
   ) {
   }
 
@@ -89,6 +94,28 @@ export class PersonAppointmentComponent implements OnInit {
   hourMarkerHide(e) {
     const hourMarkerEl = this.biqPersonAppointmentEl.nativeElement.querySelector('#hour-marker');
     gsap.to(hourMarkerEl, { duration: 0.5, autoAlpha: 0, display: 'none'});
+  }
+
+  onHourClick(e, appointmentHour) {
+    const hourMarkerEl = this.biqPersonAppointmentEl.nativeElement.querySelector('#hour-marker');
+    let date = moment(appointmentHour, 'LT', true);
+    if ( e.target.classList.contains('hour-item__15minutes') ) {
+      date.add(15, 'minutes');
+    }
+
+    const initialState = {
+      list: Object.assign(
+        {},
+        this.service.getModalConfig(),
+        {
+          appointmentDate: this.service.getAppointmentDate(),
+          appointmentHour: date.format('LT'),
+          appointmentPerson: this.personRecord
+        }
+      )
+    }
+    this.bsModalRef = this.modalService.show(AppointmentSchedulerModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable', initialState });
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
 }

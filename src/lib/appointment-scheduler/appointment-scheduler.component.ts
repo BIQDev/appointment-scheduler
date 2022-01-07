@@ -1,13 +1,10 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import * as _moment from 'moment';
 
 import { AppointmentSchedulerService } from '../appointment-scheduler.service';
 import { AppointmentConfigModel, AppointmentModalConfigModel, AppointmentPersonModel } from '../appointment-scheduler.model';
 import { AppointmentSchedulerModalComponent } from '../appointment-scheduler-modal/appointment-scheduler-modal.component';
-
-const moment = _moment;
 
 @Component({
   selector: 'biq-appointment-scheduler',
@@ -30,7 +27,6 @@ export class AppointmentSchedulerComponent implements OnInit {
   faChevronRight = faChevronRight;
 
   personSelected: number;
-  appointmentDate: Date = new Date();
 
   constructor(
     public service: AppointmentSchedulerService,
@@ -63,23 +59,13 @@ export class AppointmentSchedulerComponent implements OnInit {
     });
   }
 
-  prevDate() {
-    let prevDate = moment(this.appointmentDate).subtract(1, 'day');
-    this.appointmentDate = prevDate.toDate();
-  }
-
-  nextDate() {
-    let nextDate = moment(this.appointmentDate).add(1, 'day');
-    this.appointmentDate = nextDate.toDate();
-  }
-
   newAppointment() {
     const initialState = {
       list: Object.assign(
         {},
         this.service.getModalConfig(),
         {
-          appointmentDate: this.appointmentDate
+          appointmentDate: this.service.getAppointmentDate()
         }
       )
     }

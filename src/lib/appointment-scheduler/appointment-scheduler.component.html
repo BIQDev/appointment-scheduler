@@ -13,7 +13,7 @@
 
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                    <button class="btn btn-sm btn-info" (click)="prevDate()">
+                    <button class="btn btn-sm btn-info" (click)="service.prevDate()">
                         <fa-icon [icon]="faChevronLeft"></fa-icon>
                     </button>
                 </div>
@@ -21,11 +21,12 @@
                 <input type="text" class="form-control biq-readonly-datepicker"
                     placeholder="Select Date"
                     [readonly]="true"
-                    [(ngModel)]="appointmentDate"
+                    [bsValue]="service.getAppointmentDate()"
+                    (bsValueChange)="service.setAppointmentDate($event)"
                     bsDatepicker>
 
 
-                <div class="input-group-append" (click)="nextDate()">
+                <div class="input-group-append" (click)="service.nextDate()">
                     <button class="btn btn-sm btn-info">
                         <fa-icon [icon]="faChevronRight"></fa-icon>
                     </button>

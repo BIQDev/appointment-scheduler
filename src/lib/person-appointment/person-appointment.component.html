@@ -15,10 +15,12 @@
         <div class="hour-item" *ngFor="let hour of service.hours">
             <div class="hour-item__start"
                 (mouseenter)="hourMarkerShow($event, hour)"
-                (mouseleave)="hourItemMouseLeave($event)"></div>
+                (mouseleave)="hourItemMouseLeave($event)"
+                (click)="onHourClick($event, hour)"></div>
             <div class="hour-item__15minutes"
                 (mouseenter)="hourMarkerShow($event, hour)"
-                (mouseleave)="hourItemMouseLeave($event)"></div>
+                (mouseleave)="hourItemMouseLeave($event)"
+                (click)="onHourClick($event, hour)"></div>
         </div>
     </div>
 

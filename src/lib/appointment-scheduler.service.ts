@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
+import * as moment_ from 'moment';
+
 import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel } from './appointment-scheduler.model';
+
+const moment = moment_;
 
 const appointmentConfigDefault: AppointmentConfigModel = {
     personSelectDisabled: false
@@ -15,6 +19,8 @@ export class AppointmentSchedulerService {
 
     appointmentConfig: AppointmentConfigModel;
 
+    appointmentDate: Date;
+
     appointmentConfigModal: AppointmentModalConfigModel;
 
     personList: Array<AppointmentPersonModel> = [];
@@ -25,6 +31,7 @@ export class AppointmentSchedulerService {
     constructor() {
         this.hours = this.genHours();
         this.durations = this.genDurations();
+        this.appointmentDate = new Date();
     }
 
     getConfig(): AppointmentConfigModel {
@@ -35,13 +42,31 @@ export class AppointmentSchedulerService {
         this.appointmentConfig = Object.assign({}, config);
     }
 
+    getAppointmentDate(): Date {
+        return this.appointmentDate;
+    }
+
+    setAppointmentDate(date: Date) {
+        this.appointmentDate = date;
+    }
+
+    prevDate() {
+        let prevDate = moment(this.appointmentDate).subtract(1, 'day');
+        this.appointmentDate = prevDate.toDate();
+    }
+
+    nextDate() {
+        let nextDate = moment(this.appointmentDate).add(1, 'day');
+        this.appointmentDate = nextDate.toDate();
+    }
+
     getModalConfig(): AppointmentModalConfigModel {
         return Object.assign(
             {},
             appointmentConfigModalDefault,
             this.appointmentConfigModal,
             {
-                hours: this.getHours(),
+                hours: this.getHoursW15(),
                 durations: this.getDurations(),
                 persons: this.getPersonList(),
             }
@@ -85,8 +110,21 @@ export class AppointmentSchedulerService {
         return ranges;
     }
 
-    getHours() {
+    getHours(): string[] {
         return this.hours;
+    }
+
+    getHoursW15(): string[] {
+        let hoursW15: string[] = []
+
+        for (let i = 0; i < this.hours.length; i++) {
+            let hour = this.hours[i];
+            hoursW15.push(hour);
+            let hourW15 = moment(hour, 'LT', true).add(15, 'minutes').format('LT');
+            hoursW15.push(hourW15);
+        }
+
+        return hoursW15;
     }
 
 }

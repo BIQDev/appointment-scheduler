@@ -12,7 +12,10 @@
 
             <div class="form-group">
                 <label for="appointmentPurpose">Purpose <span class="text-danger">*</span></label>
-                <select class="custom-select custom-select-sm" id="appointmentPurpose" name="purpose">
+                <select class="custom-select custom-select-sm"
+                    id="appointmentPurpose"
+                    name="purpose"
+                    formArrayName="purpose">
                     <option>Please select purpose</option>
                     <option *ngFor="let purpose of list.purpose" [ngValue]="purpose.value">
                         {{ purpose.label }}
@@ -30,7 +33,6 @@
                             formControlName="date"
                             placeholder="Select Date"
                             [readonly]="true"
-                            [(ngModel)]="list.appointmentDate"
                             bsDatepicker/>
                     </div>
                 </div>
@@ -40,10 +42,13 @@
                 <div class="form-row">
                     <div class="col-6">
                         <label for="appointmentTime">Time <span class="text-danger">*</span></label>
-                        <select class="custom-select custom-select-sm" id="appointmentTime" name="time">
-                            <option>Please select time</option>
+                        <select class="custom-select custom-select-sm"
+                            id="appointmentTime"
+                            name="time"
+                            formControlName="time">
+                            <option [ngValue]="null" [disabled]="true" >Please select time</option>
                             <option *ngFor="let hour of list.hours"
-                                [ngValue]="hour">{{hour}}</option>
+                                [ngValue]="hour">{{hour | lowercase}}</option>
                         </select>
                     </div>
                     <div class="col-6">
@@ -62,7 +67,10 @@
             <div class="form-group">
                 <label for="appointmentPerson">{{ list.personLabel ? list.personLabel : 'Person' }} <span
                         class="text-danger">*</span></label>
-                <select class="custom-select custom-select-sm" id="appointmentPerson" name="person">
+                <select class="custom-select custom-select-sm"
+                    id="appointmentPerson"
+                    name="person"
+                    formControlName="person">
                     <option>Please select {{ (list.personLabel ? list.personLabel : 'Person') | lowercase }}</option>
                     <option *ngFor="let person of list.persons"
                         [ngValue]="person.id">

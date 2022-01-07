@@ -16,6 +16,8 @@ export interface AppointmentModalConfigModel {
     persons?: Array<AppointmentPersonModel>;
     communicationDefault?: string;
     appointmentDate?: Date;
+    appointmentHour?: string;
+    appointmentPerson?: AppointmentPersonModel;
     hours?: Array<any>;
     durations?: Array<string>;//In minutes
 }
