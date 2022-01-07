@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentSchedulerService } from '../../../lib/appointment-scheduler.service';
-import { AppointmentConfigModel, AppointmentModalConfigModel } from 'src/lib/appointment-scheduler.model';
+import { AppointmentSchedulerService } from 'src/lib/appointment-scheduler.service';
+import { AppointmentConfigModel, AppointmentModalConfigModel, AppointmentPersonTimeModel } from 'src/lib/appointment-scheduler.model';
 import { AppointmentPersonModel } from 'src/lib/appointment-scheduler.model';
 
 @Component({
@@ -45,6 +45,30 @@ export class DemoInternalComponent implements OnInit {
       ];
       this.appointmentService.setPersonList(personList);
     }, 2000);
+
+
+    setTimeout( () => {
+
+      let time1: AppointmentPersonTimeModel = {
+        personId: 1,
+        date: new Date(),
+        hourStart: 10,
+        minutesStart: 15,
+        hourEnd: 12,
+        minutesEnd: 0
+      }
+      this.appointmentService.appointmentPersonSet(time1);
+
+      let time2: AppointmentPersonTimeModel = {
+        personId: 1,
+        date: new Date(),
+        hourStart: 14,
+        minutesStart: 0,
+        hourEnd: 16,
+        minutesEnd: 45
+      }
+      this.appointmentService.appointmentPersonSet(time2);
+    }, 500);
   }
 
   appointmentReady(e) {

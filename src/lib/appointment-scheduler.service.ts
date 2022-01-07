@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment_ from 'moment';
 
-import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel } from './appointment-scheduler.model';
+import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, AppointmentPersonTimeModel, AppointmentTableConfigModel } from './appointment-scheduler.model';
 
 const moment = moment_;
 
@@ -14,16 +14,25 @@ const appointmentConfigModalDefault: AppointmentModalConfigModel = {
     communicationDefault: 'email',
 }
 
+const appointmentTableConfigDefault: AppointmentTableConfigModel = {
+    headerHeight: 30,
+    rowHeight: 30
+}
+
 @Injectable()
 export class AppointmentSchedulerService {
 
     appointmentConfig: AppointmentConfigModel;
+
+    appointmentTableConfig: AppointmentTableConfigModel;
 
     appointmentDate: Date;
 
     appointmentConfigModal: AppointmentModalConfigModel;
 
     personList: Array<AppointmentPersonModel> = [];
+
+    appointmentPersonTimes: Array<AppointmentPersonTimeModel> = [];
 
     hours: Array<string> = [];
     durations: Array<number> = [];
@@ -40,6 +49,10 @@ export class AppointmentSchedulerService {
 
     setConfig(config: AppointmentConfigModel) {
         this.appointmentConfig = Object.assign({}, config);
+    }
+
+    getTableConfig(): AppointmentTableConfigModel {
+        return Object.assign({}, appointmentTableConfigDefault);
     }
 
     getAppointmentDate(): Date {
@@ -125,6 +138,12 @@ export class AppointmentSchedulerService {
         }
 
         return hoursW15;
+    }
+
+    appointmentPersonSet(record: AppointmentPersonTimeModel) {
+        let nextRecord = [].concat(this.appointmentPersonTimes);
+        nextRecord.push(record);
+        this.appointmentPersonTimes = nextRecord;
     }
 
 }

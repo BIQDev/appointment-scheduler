@@ -6,10 +6,28 @@ export interface AppointmentPersonModel {
     avatar?: string;
 }
 
+export interface AppointmentTableConfigModel {
+    headerHeight: number;
+    rowHeight: number;
+}
+
 export interface AppointmentConfigModel {
     personAllShow?: boolean;
     personSelectDisabled?: boolean;
     tableHeight?: string;
+}
+
+export interface AppointmentReadyModel {
+    service: AppointmentSchedulerService
+}
+
+export interface AppointmentPersonTimeModel{
+    personId: any;
+    date: Date;
+    hourStart: number;
+    minutesStart: number;
+    hourEnd: number;
+    minutesEnd: number;
 }
 
 export interface AppointmentModalSubmitModel {
@@ -35,8 +53,4 @@ export interface AppointmentModalConfigModel {
     hours?: Array<any>;
     durations?: Array<string>;//In minutes
     submitCallback?: ( data: AppointmentModalSubmitModel ) => void;
-}
-
-export interface AppointmentReadyModel {
-    service: AppointmentSchedulerService
 }

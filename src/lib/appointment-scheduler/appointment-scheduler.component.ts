@@ -50,6 +50,7 @@ export class AppointmentSchedulerComponent implements OnInit {
     this.appointmentReady.emit({
       service: this.service
     });
+
   }
 
   syncScroll() {
