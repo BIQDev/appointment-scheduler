@@ -53,6 +53,12 @@ export class AppointmentSchedulerComponent implements OnInit {
 
   }
 
+  dateChange( date: Date ) {
+    this.service.setAppointmentDate( date );
+    const callback = this.service.getConfig().dateChangeCallback;
+    if(typeof callback === 'function') callback(date);
+  }
+
   syncScroll() {
     let hoursPanelEl = this.appointmentTableSection.nativeElement.querySelector('.biq-hours-panel');
     let tableContainerEl = this.appointmentTableSection.nativeElement.querySelector('.appointment-table-container');

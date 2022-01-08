@@ -22,7 +22,7 @@
                     placeholder="Select Date"
                     [readonly]="true"
                     [bsValue]="service.getAppointmentDate()"
-                    (bsValueChange)="service.setAppointmentDate($event)"
+                    (bsValueChange)="dateChange($event)"
                     bsDatepicker>
 
 

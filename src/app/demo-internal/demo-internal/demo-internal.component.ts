@@ -13,7 +13,10 @@ export class DemoInternalComponent implements OnInit {
 
   appointmentConfig: AppointmentConfigModel = {
     personAllShow: true,
-    tableHeight: '500px'
+    tableHeight: '500px',
+    dateChangeCallback: (date: Date) => {
+      console.log(date);
+    }
   };
 
   appointmentService: AppointmentSchedulerService;

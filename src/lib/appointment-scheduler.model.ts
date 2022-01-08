@@ -16,6 +16,7 @@ export interface AppointmentConfigModel {
     personAllShow?: boolean;
     personSelectDisabled?: boolean;
     tableHeight?: string;
+    dateChangeCallback?: (date: Date) => void;
 }
 
 export interface AppointmentReadyModel {
