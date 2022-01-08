@@ -1,10 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild, Input, OnDestroy, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input, OnDestroy, ViewChildren, QueryList, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 import { TextPlugin } from "gsap/TextPlugin";
 import * as moment_ from 'moment';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { filter } from 'rxjs/operators';
+import * as _ from 'lodash';
 
 import { AppointmentSchedulerService } from '../appointment-scheduler.service';
 import { AppointmentPersonModel, AppointmentPersonTimeModel } from '../appointment-scheduler.model';
@@ -33,9 +35,12 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
 
   faUser = faUser;
 
+  isAfterViewInit: boolean;
+
   constructor(
     public service: AppointmentSchedulerService,
     private modalService: BsModalService,
+    private cdr: ChangeDetectorRef,
   ) {
   }
 
@@ -64,12 +69,25 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
         gsap.set(handle, { x: colRect.width, y: 0 });
       }
     });
+
+    this.service.appointmentPersonTimesChange$
+      .pipe(
+        filter( e => {
+          let time: AppointmentPersonTimeModel = e as AppointmentPersonTimeModel;
+          return time.personId === this.personRecord.id;
+        } )
+      )
+      .subscribe( res => {
+        let time: AppointmentPersonTimeModel = res as AppointmentPersonTimeModel;
+        this.cdr.detectChanges()
+        this.appointmentsChanges();
+      } );
   }
 
   ngOnDestroy() {
   }
 
-  getAppointments() {
+  getAppointments() : Array<AppointmentPersonTimeModel> {
     return this.service.appointmentPersonTimes
       .filter(e => e.personId === this.personRecord.id);
   }
@@ -130,8 +148,15 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
-  ngAfterViewInit() {
-    this.appointmentEls
+  appointmentsChanges( filter: AppointmentPersonTimeModel = null ) {
+    this.appointmentEls.filter( e => {
+      if ( biqHelper.isNull(filter) ) {
+        return true;
+      }
+
+      const elData: AppointmentPersonTimeModel = biqHelper.JSON.parse(e.nativeElement.getAttribute('data-appointment')) as AppointmentPersonTimeModel;
+      return _.isEqual(elData, filter);
+    } )
       .forEach(e => {
         let el = e.nativeElement;
         const tableConfig = this.service.getTableConfig();
@@ -146,8 +171,14 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
         let height: number = durationMins / 15 * tableConfig.rowHeight;
 
 
-        gsap.to(el, { duration: 0.3, delay: 0.8, autoAlpha: 1, display: 'block', top, height });
+        const delay: number = this.isAfterViewInit ? 0 : 0.8;
+        gsap.to(el, { duration: 0.3, delay, autoAlpha: 1, display: 'block', top, height });
       });
+  }
+
+  ngAfterViewInit() {
+    this.isAfterViewInit = true;
+    this.appointmentsChanges();
   }
 
 }

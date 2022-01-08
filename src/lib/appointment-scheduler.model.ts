@@ -1,3 +1,4 @@
+import { BsModalRef } from "ngx-bootstrap/modal";
 import { AppointmentSchedulerService } from "./appointment-scheduler.service";
 
 export interface AppointmentPersonModel {
@@ -52,5 +53,5 @@ export interface AppointmentModalConfigModel {
     appointmentPerson?: AppointmentPersonModel;
     hours?: Array<any>;
     durations?: Array<string>;//In minutes
-    submitCallback?: ( data: AppointmentModalSubmitModel ) => void;
+    submitCallback?: ( data: AppointmentModalSubmitModel, valid: boolean, bsModalRef: BsModalRef ) => void;
 }

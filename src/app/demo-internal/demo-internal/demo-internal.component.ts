@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentSchedulerService } from 'src/lib/appointment-scheduler.service';
 import { AppointmentConfigModel, AppointmentModalConfigModel, AppointmentPersonTimeModel } from 'src/lib/appointment-scheduler.model';
 import { AppointmentPersonModel } from 'src/lib/appointment-scheduler.model';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-demo-internal',
@@ -26,6 +27,19 @@ export class DemoInternalComponent implements OnInit {
       { value: 'follow_up_patient', label: 'Follow up patient' },
       { value: 'other', label: 'Other' },
     ],
+    submitCallback: (data, valid, bsModalRef: BsModalRef) => {
+      console.log(data, valid);
+      let time2: AppointmentPersonTimeModel = {
+        personId: data.personId,
+        date: new Date(data.date),
+        hourStart: 8,
+        minutesStart: 15,
+        hourEnd: 9,
+        minutesEnd: 45
+      }
+      this.appointmentService.appointmentPersonSet(time2);
+      bsModalRef.hide();
+    }
   }
 
   constructor() { }

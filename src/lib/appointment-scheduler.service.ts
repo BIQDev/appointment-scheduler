@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment_ from 'moment';
+import { Observable, Subject } from 'rxjs';
 
 import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, AppointmentPersonTimeModel, AppointmentTableConfigModel } from './appointment-scheduler.model';
 
@@ -33,6 +34,9 @@ export class AppointmentSchedulerService {
     personList: Array<AppointmentPersonModel> = [];
 
     appointmentPersonTimes: Array<AppointmentPersonTimeModel> = [];
+    appointmentPersonTimesChange$ = new Subject();
+
+    componentRefreshRef: () => void;
 
     hours: Array<string> = [];
     durations: Array<number> = [];
@@ -141,9 +145,8 @@ export class AppointmentSchedulerService {
     }
 
     appointmentPersonSet(record: AppointmentPersonTimeModel) {
-        let nextRecord = [].concat(this.appointmentPersonTimes);
-        nextRecord.push(record);
-        this.appointmentPersonTimes = nextRecord;
+        this.appointmentPersonTimes = [ ...this.appointmentPersonTimes, record ];
+        this.appointmentPersonTimesChange$.next(record);
     }
 
 }

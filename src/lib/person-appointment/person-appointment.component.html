@@ -26,7 +26,7 @@
         <div class="appointment-item" #appointmentEls
             (mouseenter)="hourMarkerHide()"
             *ngFor="let appointment of getAppointments()"
-            [attr.data-appointment]="(appointment|json)">
+            [attr.data-appointment]="(appointment|biqJsonSerialize)">
         </div>
         
     </div>
