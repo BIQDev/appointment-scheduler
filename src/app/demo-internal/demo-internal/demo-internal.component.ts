@@ -28,14 +28,15 @@ export class DemoInternalComponent implements OnInit {
       { value: 'other', label: 'Other' },
     ],
     submitCallback: (data, valid, bsModalRef: BsModalRef) => {
-      console.log(data, valid);
       let time2: AppointmentPersonTimeModel = {
         personId: data.personId,
         date: new Date(data.date),
         hourStart: 8,
         minutesStart: 15,
         hourEnd: 9,
-        minutesEnd: 45
+        minutesEnd: 45,
+        purpose: 'Meet and greet',
+        callersName: 'Rudi'
       }
       this.appointmentService.appointmentPersonSet(time2);
       bsModalRef.hide();
@@ -69,7 +70,9 @@ export class DemoInternalComponent implements OnInit {
         hourStart: 10,
         minutesStart: 15,
         hourEnd: 12,
-        minutesEnd: 0
+        minutesEnd: 0,
+        purpose: 'Meet and greet',
+        callersName: 'Santoso'
       }
       this.appointmentService.appointmentPersonSet(time1);
 
@@ -79,7 +82,9 @@ export class DemoInternalComponent implements OnInit {
         hourStart: 14,
         minutesStart: 0,
         hourEnd: 16,
-        minutesEnd: 45
+        minutesEnd: 45,
+        purpose: 'Onboard parent',
+        callersName: 'Paijo'
       }
       this.appointmentService.appointmentPersonSet(time2);
     }, 500);

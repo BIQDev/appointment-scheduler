@@ -162,7 +162,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
         const tableConfig = this.service.getTableConfig();
         let data = el.getAttribute('data-appointment');
         let record: AppointmentPersonTimeModel = biqHelper.JSON.parse(data, true) as AppointmentPersonTimeModel;
-        let top: number = (record.hourStart - 8) * tableConfig.rowHeight * 4;
+        let top: number = ( (record.hourStart+(record.minutesStart/60)) - 8) * tableConfig.rowHeight * 4;
         let initialTop: number = top - 50;
         el.style.top = `${initialTop}px`;
 
@@ -174,6 +174,12 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
         const delay: number = this.isAfterViewInit ? 0 : 0.8;
         gsap.to(el, { duration: 0.3, delay, autoAlpha: 1, display: 'block', top, height });
       });
+  }
+
+  appointmentHourItemRender( rec: AppointmentPersonTimeModel ):string {
+    let timeStart = `${rec.hourStart}:${rec.minutesStart}`;
+    let timeEnd = `${rec.hourEnd}:${rec.minutesEnd}`;
+    return moment(timeStart, 'kk:mm').format('LT') + ' to ' + moment(timeEnd, 'kk:mm').format('LT');
   }
 
   ngAfterViewInit() {

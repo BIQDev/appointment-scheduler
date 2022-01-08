@@ -27,6 +27,14 @@
             (mouseenter)="hourMarkerHide()"
             *ngFor="let appointment of getAppointments()"
             [attr.data-appointment]="(appointment|biqJsonSerialize)">
+            <div class="appointment-item__inner">
+                <div class="time-range">
+                    {{appointmentHourItemRender(appointment)}}
+                </div>
+                <div class="description">
+                    {{ appointment.purpose }} {{ appointment.callersName }}
+                </div>
+            </div>
         </div>
         
     </div>

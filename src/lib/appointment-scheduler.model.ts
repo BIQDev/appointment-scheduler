@@ -29,6 +29,8 @@ export interface AppointmentPersonTimeModel{
     minutesStart: number;
     hourEnd: number;
     minutesEnd: number;
+    purpose: string;
+    callersName: string;
 }
 
 export interface AppointmentModalSubmitModel {
