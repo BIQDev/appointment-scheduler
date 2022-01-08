@@ -10,7 +10,7 @@
         <div class="col-resize-handle"></div>
     </div>
 
-    <div class="biq-person-appointment__record" (mouseleave)="hourMarkerHide($event)">
+    <div class="biq-person-appointment__record" (mouseleave)="hourMarkerHide()">
         <div id="hour-marker"></div>
         <div class="hour-item" *ngFor="let hour of service.hours">
             <div class="hour-item__start"

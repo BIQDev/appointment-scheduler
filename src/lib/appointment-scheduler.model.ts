@@ -46,7 +46,7 @@ export interface AppointmentModalSubmitModel {
 }
 
 export interface AppointmentModalConfigModel {
-    purpose?: Array<{ value: any; label: any; }>;
+    purposes?: Array<{ value: any; label: any; }>;
     personLabel?: string;
     persons?: Array<AppointmentPersonModel>;
     communicationDefault?: string;

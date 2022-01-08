@@ -5,13 +5,14 @@ import { TextPlugin } from "gsap/TextPlugin";
 import * as moment_ from 'moment';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { filter } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 import { AppointmentSchedulerService } from '../appointment-scheduler.service';
 import { AppointmentPersonModel, AppointmentPersonTimeModel } from '../appointment-scheduler.model';
 import { AppointmentSchedulerModalComponent } from '../appointment-scheduler-modal/appointment-scheduler-modal.component';
 import { biqHelper } from '@biqdev/ng-helper';
+import { Subject } from 'rxjs';
 
 const moment = moment_;
 
@@ -23,6 +24,7 @@ gsap.registerPlugin(Draggable, TextPlugin);
   styleUrls: ['./person-appointment.component.scss']
 })
 export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewInit {
+  stop$ = new Subject();
   @Input() personRecord: AppointmentPersonModel;
 
   @ViewChild('biqPersonAppointmentEl', { static: true })
@@ -72,6 +74,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
 
     this.service.appointmentPersonTimesChange$
       .pipe(
+        takeUntil(this.stop$),
         filter( e => {
           let time: AppointmentPersonTimeModel = e as AppointmentPersonTimeModel;
           return time.personId === this.personRecord.id;
@@ -85,6 +88,8 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   ngOnDestroy() {
+    this.stop$.next();
+    this.stop$.complete();
   }
 
   getAppointments() : Array<AppointmentPersonTimeModel> {

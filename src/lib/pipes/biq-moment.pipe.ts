@@ -1,6 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import {biqHelper} from '@biqdev/ng-helper';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
+
+const moment = moment_;
 
 @Pipe({
   name: 'biqMoment'

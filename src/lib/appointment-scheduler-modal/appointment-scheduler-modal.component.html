@@ -17,7 +17,7 @@
                 name="purpose"
                 formControlName="purpose">
                 <option [ngValue]="null" [disabled]="true">Please select purpose</option>
-                <option *ngFor="let purpose of list.purpose" [ngValue]="purpose.value">
+                <option *ngFor="let purpose of list.purposes" [ngValue]="purpose.value">
                     {{ purpose.label }}
                 </option>
             </select>

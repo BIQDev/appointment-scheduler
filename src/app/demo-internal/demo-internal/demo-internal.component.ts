@@ -19,7 +19,7 @@ export class DemoInternalComponent implements OnInit {
   appointmentService: AppointmentSchedulerService;
 
   appointmentModalConfig: AppointmentModalConfigModel = {
-    purpose: [
+    purposes: [
       { value: 'meet_greet', label: 'Meet & Greet' },
       { value: 'onboard_parent', label: 'Onboard Parent' },
       { value: 'onboard_patient', label: 'Onboard Patient' },
