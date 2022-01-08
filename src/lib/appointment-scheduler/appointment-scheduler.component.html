@@ -7,7 +7,7 @@
                 [(ngModel)]="personSelected"
                 (ngModelChange)="personChange($event)"
                 [disabled]="service.getConfig().personSelectDisabled">
-                <option *ngIf="service.getConfig().personAllShow" [ngValue]="-1">All</option>
+                <option *ngIf="service.getConfig().personAllShow" [ngValue]="null">All</option>
                 <option *ngFor="let person of service.personList" [ngValue]="person.id">{{person.name}}</option>
               </select>
         </div>

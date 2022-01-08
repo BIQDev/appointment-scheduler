@@ -5,6 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AppointmentSchedulerService } from '../appointment-scheduler.service';
 import { AppointmentConfigModel, AppointmentModalConfigModel, AppointmentReadyModel } from '../appointment-scheduler.model';
 import { AppointmentSchedulerModalComponent } from '../appointment-scheduler-modal/appointment-scheduler-modal.component';
+import { biqHelper } from '@biqdev/ng-helper';
 
 @Component({
   selector: 'biq-appointment-scheduler',
@@ -38,7 +39,7 @@ export class AppointmentSchedulerComponent implements OnInit {
     this.service.setConfig(this.appointmentConfig);
 
     if (this.service.getConfig().personAllShow) {
-      this.personSelected = -1;
+      this.personSelected = null;
     } else {
       this.personSelected = this.service.personList[0].id;
     }
@@ -54,7 +55,12 @@ export class AppointmentSchedulerComponent implements OnInit {
   }
 
   personChange(personId) {
-    this.service.setPersonListFilter({fieldName: 'id', value: personId});
+    if ( !biqHelper.isNull(personId) ) {
+      this.service.setPersonListFilter({fieldName: 'id', value: personId});
+    } else {
+      this.service.setPersonListFilter(null);
+    }
+
     const callback = this.service.getConfig().personListChangeCallback;
     if ( typeof callback === 'function' ) {
       callback(personId);
