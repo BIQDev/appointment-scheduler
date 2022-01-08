@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { biqHelper } from '@biqdev/ng-helper';
 import * as moment_ from 'moment';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
-import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, AppointmentPersonTimeModel, AppointmentTableConfigModel } from './appointment-scheduler.model';
+import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, AppointmentPersonTimeModel, AppointmentTableConfigModel, AppointmentPersonFilterModel } from './appointment-scheduler.model';
 
 const moment = moment_;
 
@@ -32,6 +33,8 @@ export class AppointmentSchedulerService {
     appointmentConfigModal: AppointmentModalConfigModel;
 
     personList: Array<AppointmentPersonModel> = [];
+    personListFilter: AppointmentPersonFilterModel;
+    personListFitered$: BehaviorSubject<Array<AppointmentPersonModel>> = new BehaviorSubject( [] );
 
     appointmentPersonTimes: Array<AppointmentPersonTimeModel> = [];
     appointmentPersonTimesChange$ = new Subject();
@@ -95,7 +98,20 @@ export class AppointmentSchedulerService {
     }
 
     setPersonList(personList: Array<AppointmentPersonModel>) {
-        this.personList = [].concat(personList);
+        this.personList = [...personList];
+        this.setPersonListFilter(this.personListFilter);//Refresh filter
+    }
+
+    setPersonListFilter(filter: AppointmentPersonFilterModel) {
+        this.personListFilter = filter;//For use another FN
+        let filtered = this.personList;
+        if ( !biqHelper.isNull(filter) ) {
+            filtered = filtered
+                .filter( e => {
+                    return e[filter.fieldName] === filter.value;
+                } )
+        }
+        this.personListFitered$.next(filtered);
     }
 
     getPersonList(): Array<AppointmentPersonModel> {

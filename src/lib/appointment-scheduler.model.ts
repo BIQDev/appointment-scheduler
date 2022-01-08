@@ -7,6 +7,11 @@ export interface AppointmentPersonModel {
     avatar?: string;
 }
 
+export interface AppointmentPersonFilterModel {
+    fieldName: string;
+    value: any;
+}
+
 export interface AppointmentTableConfigModel {
     headerHeight: number;
     rowHeight: number;
@@ -16,6 +21,7 @@ export interface AppointmentConfigModel {
     personAllShow?: boolean;
     personSelectDisabled?: boolean;
     tableHeight?: string;
+    personListChangeCallback?: (personId: any) => void;
     dateChangeCallback?: (date: Date) => void;
 }
 

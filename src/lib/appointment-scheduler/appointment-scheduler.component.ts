@@ -53,6 +53,18 @@ export class AppointmentSchedulerComponent implements OnInit {
 
   }
 
+  personChange(personId) {
+    this.service.setPersonListFilter({fieldName: 'id', value: personId});
+    const callback = this.service.getConfig().personListChangeCallback;
+    if ( typeof callback === 'function' ) {
+      callback(personId);
+    }
+  }
+
+  getPersons() {
+
+  }
+
   dateChange( date: Date ) {
     this.service.setAppointmentDate( date );
     const callback = this.service.getConfig().dateChangeCallback;
