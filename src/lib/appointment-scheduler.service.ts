@@ -183,12 +183,12 @@ export class AppointmentSchedulerService {
         return hoursW15;
     }
 
-    setPersonSchedule(record: PersonScheduleModel) {
+    addPersonSchedule(record: PersonScheduleModel) {
         this.personSchedules = [ ...this.personSchedules, record ];
         this.personSchedulesChange$.next(record);
     }
 
-    setPersonSchedules(records: Array<PersonScheduleModel>) {
+    setPersonSchedule(records: Array<PersonScheduleModel>) {
         this.personSchedules = [ ...records ];
         this.personSchedulesChange$.next(records);
     }

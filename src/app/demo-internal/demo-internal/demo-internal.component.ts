@@ -41,7 +41,7 @@ export class DemoInternalComponent implements OnInit {
         purpose: 'Meet and greet',
         callersName: 'Rudi'
       }
-      this.appointmentService.setPersonSchedule(time2);
+      this.appointmentService.addPersonSchedule(time2);
       bsModalRef.hide();
     }
   }
@@ -77,7 +77,7 @@ export class DemoInternalComponent implements OnInit {
         purpose: 'Meet and greet',
         callersName: 'Santoso'
       }
-      this.appointmentService.setPersonSchedule(time1);
+      this.appointmentService.addPersonSchedule(time1);
 
       let time2: PersonScheduleModel = {
         personId: 1,
@@ -89,7 +89,7 @@ export class DemoInternalComponent implements OnInit {
         purpose: 'Onboard parent',
         callersName: 'Paijo'
       }
-      this.appointmentService.setPersonSchedule(time2);
+      this.appointmentService.addPersonSchedule(time2);
     }, 500);
   }
 
