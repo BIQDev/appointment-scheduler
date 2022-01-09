@@ -93,6 +93,19 @@ export class AppointmentSchedulerService {
         );
     }
 
+    getAppointmentPurposeLabel( value: any ) : string {
+        const arrPurposes: Array<{value: any, label: any}> = this.getModalConfig().purposes;
+        if ( arrPurposes.length ) {
+            for ( var i = 0; i < arrPurposes.length; i++ ) {
+                let purpose = arrPurposes[i];
+                if ( purpose.value === value ) {
+                    return purpose.label;
+                }
+            }
+        }
+        return '';
+    }
+
     setModalConfig(config: AppointmentModalConfigModel) {
         this.appointmentConfigModal = Object.assign({}, config);
     }
@@ -116,6 +129,16 @@ export class AppointmentSchedulerService {
 
     getPersonList(): Array<AppointmentPersonModel> {
         return this.personList;
+    }
+
+    getPersonById( id: any ): AppointmentPersonModel {
+        for ( let i = 0; i < this.personList.length; i++ ) {
+            const personItem = this.personList[i];
+            if ( personItem.id === id ) {
+                return personItem;
+            }
+        }
+        return {id: null, name: null};
     }
 
     genDurations(): Array<number> {
