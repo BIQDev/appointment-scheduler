@@ -3,7 +3,7 @@ import { biqHelper } from '@biqdev/ng-helper';
 import * as moment_ from 'moment';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
-import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, AppointmentPersonTimeModel, AppointmentTableConfigModel, AppointmentPersonFilterModel } from './appointment-scheduler.model';
+import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, PersonScheduleModel, AppointmentTableConfigModel, AppointmentPersonFilterModel } from './appointment-scheduler.model';
 
 const moment = moment_;
 
@@ -13,7 +13,7 @@ const appointmentConfigDefault: AppointmentConfigModel = {
 
 const appointmentConfigModalDefault: AppointmentModalConfigModel = {
     personLabel: 'Coach',
-    communicationDefault: 'email',
+    communicationDefault: 'Email',
 }
 
 const appointmentTableConfigDefault: AppointmentTableConfigModel = {
@@ -36,8 +36,8 @@ export class AppointmentSchedulerService {
     personListFilter: AppointmentPersonFilterModel;
     personListFitered$: BehaviorSubject<Array<AppointmentPersonModel>> = new BehaviorSubject( [] );
 
-    appointmentPersonTimes: Array<AppointmentPersonTimeModel> = [];
-    appointmentPersonTimesChange$ = new Subject();
+    personSchedules: Array<PersonScheduleModel> = [];
+    personSchedulesChange$ = new Subject();
 
     componentRefreshRef: () => void;
 
@@ -160,9 +160,9 @@ export class AppointmentSchedulerService {
         return hoursW15;
     }
 
-    appointmentPersonSet(record: AppointmentPersonTimeModel) {
-        this.appointmentPersonTimes = [ ...this.appointmentPersonTimes, record ];
-        this.appointmentPersonTimesChange$.next(record);
+    setPersonSchedule(record: PersonScheduleModel) {
+        this.personSchedules = [ ...this.personSchedules, record ];
+        this.personSchedulesChange$.next(record);
     }
 
 }

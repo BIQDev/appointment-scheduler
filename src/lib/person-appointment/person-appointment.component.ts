@@ -8,7 +8,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 import { AppointmentSchedulerService } from '../appointment-scheduler.service';
-import { AppointmentPersonModel, AppointmentPersonTimeModel } from '../appointment-scheduler.model';
+import { AppointmentPersonModel, PersonScheduleModel } from '../appointment-scheduler.model';
 import { AppointmentSchedulerModalComponent } from '../appointment-scheduler-modal/appointment-scheduler-modal.component';
 import { biqHelper } from '@biqdev/ng-helper';
 import { Subject } from 'rxjs';
@@ -69,16 +69,16 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
       }
     });
 
-    this.service.appointmentPersonTimesChange$
+    this.service.personSchedulesChange$
       .pipe(
         takeUntil(this.stop$),
         filter( e => {
-          let time: AppointmentPersonTimeModel = e as AppointmentPersonTimeModel;
+          let time: PersonScheduleModel = e as PersonScheduleModel;
           return time.personId === this.personRecord.id;
         } )
       )
       .subscribe( res => {
-        let time: AppointmentPersonTimeModel = res as AppointmentPersonTimeModel;
+        let time: PersonScheduleModel = res as PersonScheduleModel;
         this.cdr.detectChanges()
         this.appointmentsChanges();
       } );
@@ -89,8 +89,8 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
     this.stop$.complete();
   }
 
-  getAppointments() : Array<AppointmentPersonTimeModel> {
-    return this.service.appointmentPersonTimes
+  getAppointments() : Array<PersonScheduleModel> {
+    return this.service.personSchedules
       .filter(e => e.personId === this.personRecord.id);
   }
 
@@ -150,27 +150,27 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
-  appointmentsChanges( filter: AppointmentPersonTimeModel = null ) {
+  appointmentsChanges( filter: PersonScheduleModel = null ) {
     this.appointmentEls.filter( e => {
       if ( biqHelper.isNull(filter) ) {
         return true;
       }
 
-      const elData: AppointmentPersonTimeModel = biqHelper.JSON.parse(e.nativeElement.getAttribute('data-appointment')) as AppointmentPersonTimeModel;
+      const elData: PersonScheduleModel = biqHelper.JSON.parse(e.nativeElement.getAttribute('data-appointment')) as PersonScheduleModel;
       return _.isEqual(elData, filter);
     } )
       .forEach(e => {
         let el = e.nativeElement;
         const tableConfig = this.service.getTableConfig();
         let data = el.getAttribute('data-appointment');
-        let record: AppointmentPersonTimeModel = biqHelper.JSON.parse(data, true) as AppointmentPersonTimeModel;
+        let record: PersonScheduleModel = biqHelper.JSON.parse(data, true) as PersonScheduleModel;
         let top: number = ( (record.hourStart+(record.minutesStart/60)) - 8) * tableConfig.rowHeight * 4;
         let initialTop: number = top - 50;
         el.style.top = `${initialTop}px`;
 
         const durationMins: number = ((record.hourEnd * 60) + record.minutesEnd) - ((record.hourStart * 60) - record.minutesStart);
 
-        let height: number = durationMins / 15 * tableConfig.rowHeight;
+        let height: number = (durationMins / 15 * tableConfig.rowHeight ) -2;//-2 for spacing
 
 
         const delay: number = this.isAfterViewInit ? 0 : 0.8;
@@ -178,7 +178,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
       });
   }
 
-  appointmentHourItemRender( rec: AppointmentPersonTimeModel ):string {
+  appointmentHourItemRender( rec: PersonScheduleModel ):string {
     let timeStart = `${rec.hourStart}:${rec.minutesStart}`;
     let timeEnd = `${rec.hourEnd}:${rec.minutesEnd}`;
     return moment(timeStart, 'kk:mm').format('LT') + ' to ' + moment(timeEnd, 'kk:mm').format('LT');

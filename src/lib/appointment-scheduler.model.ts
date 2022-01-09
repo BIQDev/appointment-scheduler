@@ -29,7 +29,7 @@ export interface AppointmentReadyModel {
     service: AppointmentSchedulerService
 }
 
-export interface AppointmentPersonTimeModel{
+export interface PersonScheduleModel{
     personId: any;
     date: Date;
     hourStart: number;

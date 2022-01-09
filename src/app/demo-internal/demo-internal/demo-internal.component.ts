@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentSchedulerService } from 'src/lib/appointment-scheduler.service';
-import { AppointmentConfigModel, AppointmentModalConfigModel, AppointmentPersonTimeModel } from 'src/lib/appointment-scheduler.model';
+import { AppointmentConfigModel, AppointmentModalConfigModel, PersonScheduleModel } from 'src/lib/appointment-scheduler.model';
 import { AppointmentPersonModel } from 'src/lib/appointment-scheduler.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -31,7 +31,7 @@ export class DemoInternalComponent implements OnInit {
       { value: 'other', label: 'Other' },
     ],
     submitCallback: (data, valid, bsModalRef: BsModalRef) => {
-      let time2: AppointmentPersonTimeModel = {
+      let time2: PersonScheduleModel = {
         personId: data.personId,
         date: new Date(data.date),
         hourStart: 8,
@@ -41,7 +41,7 @@ export class DemoInternalComponent implements OnInit {
         purpose: 'Meet and greet',
         callersName: 'Rudi'
       }
-      this.appointmentService.appointmentPersonSet(time2);
+      this.appointmentService.setPersonSchedule(time2);
       bsModalRef.hide();
     }
   }
@@ -67,7 +67,7 @@ export class DemoInternalComponent implements OnInit {
 
     setTimeout( () => {
 
-      let time1: AppointmentPersonTimeModel = {
+      let time1: PersonScheduleModel = {
         personId: 1,
         date: new Date(),
         hourStart: 10,
@@ -77,9 +77,9 @@ export class DemoInternalComponent implements OnInit {
         purpose: 'Meet and greet',
         callersName: 'Santoso'
       }
-      this.appointmentService.appointmentPersonSet(time1);
+      this.appointmentService.setPersonSchedule(time1);
 
-      let time2: AppointmentPersonTimeModel = {
+      let time2: PersonScheduleModel = {
         personId: 1,
         date: new Date(),
         hourStart: 14,
@@ -89,7 +89,7 @@ export class DemoInternalComponent implements OnInit {
         purpose: 'Onboard parent',
         callersName: 'Paijo'
       }
-      this.appointmentService.appointmentPersonSet(time2);
+      this.appointmentService.setPersonSchedule(time2);
     }, 500);
   }
 
