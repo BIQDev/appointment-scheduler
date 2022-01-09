@@ -120,14 +120,20 @@
         <div class="d-flex">
 
             <div class="custom-control custom-radio m-1">
-                <input type="radio" id="comunicationMethodEmail" name="comunicationMethod" class="custom-control-input"
+                <input type="radio" id="communicationMethodEmail" name="communicationMethod"
+                    class="custom-control-input"
+                    value="email"
+                    formControlName="communicationMethod"
                     [checked]="list.communicationDefault === 'email'">
-                <label class="custom-control-label" for="comunicationMethodEmail">Email</label>
+                <label class="custom-control-label" for="communicationMethodEmail">Email</label>
             </div>
             <div class="custom-control custom-radio m-1">
-                <input type="radio" id="comunicationMethodText" name="comunicationMethod" class="custom-control-input"
+                <input type="radio" id="communicationMethodText" name="communicationMethod"
+                    class="custom-control-input"
+                    value="text"
+                    formControlName="communicationMethod"
                     [checked]="list.communicationDefault === 'text'">
-                <label class="custom-control-label" for="comunicationMethodText">Text</label>
+                <label class="custom-control-label" for="communicationMethodText">Text</label>
             </div>
 
         </div>

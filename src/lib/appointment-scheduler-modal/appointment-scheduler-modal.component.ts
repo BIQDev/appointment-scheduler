@@ -27,6 +27,7 @@ export class AppointmentSchedulerModalComponent implements OnInit {
     callersEmail: ['', [Validators.required]],
     contactNo: ['', [Validators.required]],
     relationship: ['', [Validators.required]],
+    communicationMethod: ['',[Validators.required]],
   });
 
   constructor(
@@ -61,7 +62,8 @@ export class AppointmentSchedulerModalComponent implements OnInit {
       callersName: controls.callersName.value,
       callersEmail: controls.callersEmail.value,
       contactNo: controls.contactNo.value,
-      relationShipToPatient: controls.relationship.value
+      relationShipToPatient: controls.relationship.value,
+      communicationMethod: controls.communicationMethod.value,
     };
 
     this.list.submitCallback(submitData, this.formAppointment.valid, this.bsModalRef);

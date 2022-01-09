@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, OnDestroy, ViewChildren, QueryList, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
-import { TextPlugin } from "gsap/TextPlugin";
 import * as moment_ from 'moment';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -15,8 +14,6 @@ import { biqHelper } from '@biqdev/ng-helper';
 import { Subject } from 'rxjs';
 
 const moment = moment_;
-
-gsap.registerPlugin(Draggable, TextPlugin);
 
 @Component({
   selector: 'biq-person-appointment',

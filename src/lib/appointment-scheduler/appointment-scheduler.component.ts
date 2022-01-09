@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
@@ -6,6 +6,8 @@ import { AppointmentSchedulerService } from '../appointment-scheduler.service';
 import { AppointmentConfigModel, AppointmentModalConfigModel, AppointmentReadyModel } from '../appointment-scheduler.model';
 import { AppointmentSchedulerModalComponent } from '../appointment-scheduler-modal/appointment-scheduler-modal.component';
 import { biqHelper } from '@biqdev/ng-helper';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'biq-appointment-scheduler',
@@ -13,7 +15,9 @@ import { biqHelper } from '@biqdev/ng-helper';
   styleUrls: ['./appointment-scheduler.component.scss'],
   providers: [AppointmentSchedulerService]
 })
-export class AppointmentSchedulerComponent implements OnInit {
+export class AppointmentSchedulerComponent implements OnInit, OnDestroy {
+
+  stop$ = new Subject();
 
   @Input() appointmentConfig: AppointmentConfigModel;
   @Input() appointmentModalConfig: AppointmentModalConfigModel;
@@ -32,6 +36,7 @@ export class AppointmentSchedulerComponent implements OnInit {
   constructor(
     public service: AppointmentSchedulerService,
     private modalService: BsModalService,
+    private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
@@ -52,6 +57,15 @@ export class AppointmentSchedulerComponent implements OnInit {
       service: this.service
     });
 
+    this.service.personListFitered$
+      .pipe( takeUntil(this.stop$) )
+      .subscribe( () => this.cdr.detectChanges())
+
+  }
+
+  ngOnDestroy() {
+    this.stop$.next();
+    this.stop$.complete();
   }
 
   personChange(personId) {

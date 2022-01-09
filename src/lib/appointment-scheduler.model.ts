@@ -50,6 +50,7 @@ export interface AppointmentModalSubmitModel {
     callersEmail: string;
     contactNo: string;
     relationShipToPatient: string;
+    communicationMethod: string;
 }
 
 export interface AppointmentModalConfigModel {

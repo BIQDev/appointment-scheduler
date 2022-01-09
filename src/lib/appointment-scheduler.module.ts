@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { gsap } from 'gsap';
+import { Draggable } from "gsap/Draggable";
+import { TextPlugin } from "gsap/TextPlugin";
 
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { getDatepickerConfig } from './bs-config';
@@ -15,6 +18,8 @@ import { AppointmentSchedulerModalComponent } from './appointment-scheduler-moda
 import { BiqMomentPipe } from './pipes/biq-moment.pipe';
 import { BiqMinsToHoursPipe } from './pipes/mins-to-hours.pipe';
 import { BiqJsonSerializePipe } from './pipes/json-serialize.pipe';
+
+gsap.registerPlugin(Draggable, TextPlugin);
 
 
 @NgModule({
