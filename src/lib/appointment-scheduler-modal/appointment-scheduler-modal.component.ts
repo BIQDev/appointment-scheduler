@@ -43,6 +43,13 @@ export class AppointmentSchedulerModalComponent implements OnInit {
     if (!biqHelper.isNull(this.list.appointmentPerson)) {
       this.formAppointment.controls.person.setValue(this.list.appointmentPerson.id);
     }
+
+    if (this.list.communicationDefault === 'Text') {
+      this.formAppointment.controls.communicationMethod.setValue('Text');
+    } else {
+      this.formAppointment.controls.communicationMethod.setValue('Email');
+    }
+
   }
 
   submit() {

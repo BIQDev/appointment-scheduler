@@ -173,10 +173,10 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
         let initialTop: number = top - 50;
         el.style.top = `${initialTop}px`;
 
-        const durationMins: number = ((record.hourEnd * 60) + record.minutesEnd) - ((record.hourStart * 60) - record.minutesStart);
+        const durationMins: number = ((record.hourEnd * 60) + record.minutesEnd) - ((record.hourStart * 60) + record.minutesStart);
 
-        let height: number = (durationMins / 15 * tableConfig.rowHeight ) -2;//-2 for spacing
-
+        let height: number = (durationMins / 15 * tableConfig.rowHeight ) - 2;//-2 for spacing
+        height = height >= 0 ? height : 3;
 
         const delay: number = this.isAfterViewInit ? 0 : 0.8;
         gsap.to(el, { duration: 0.3, delay, autoAlpha: 1, display: 'block', top, height });
