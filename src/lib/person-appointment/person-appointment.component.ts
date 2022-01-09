@@ -73,8 +73,13 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
       .pipe(
         takeUntil(this.stop$),
         filter( e => {
-          let time: PersonScheduleModel = e as PersonScheduleModel;
-          return time.personId === this.personRecord.id;
+          let schedule: PersonScheduleModel;
+          if ( Array.isArray(e) ) {
+            schedule = e[0] as PersonScheduleModel;
+          } else {
+            schedule = e as PersonScheduleModel;
+          }
+          return schedule.personId === this.personRecord.id;
         } )
       )
       .subscribe( res => {

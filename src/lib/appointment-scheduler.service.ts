@@ -37,7 +37,7 @@ export class AppointmentSchedulerService {
     personListFitered$: BehaviorSubject<Array<AppointmentPersonModel>> = new BehaviorSubject( [] );
 
     personSchedules: Array<PersonScheduleModel> = [];
-    personSchedulesChange$ = new Subject();
+    personSchedulesChange$ = new Subject(); //Subject<Array<PersonScheduleModel>> | Subject<PersonScheduleModel>
 
     componentRefreshRef: () => void;
 
@@ -163,6 +163,11 @@ export class AppointmentSchedulerService {
     setPersonSchedule(record: PersonScheduleModel) {
         this.personSchedules = [ ...this.personSchedules, record ];
         this.personSchedulesChange$.next(record);
+    }
+
+    setPersonSchedules(records: Array<PersonScheduleModel>) {
+        this.personSchedules = [ ...records ];
+        this.personSchedulesChange$.next(records);
     }
 
 }
