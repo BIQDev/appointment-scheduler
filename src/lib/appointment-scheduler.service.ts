@@ -37,7 +37,7 @@ export class AppointmentSchedulerService {
     personListFitered$: BehaviorSubject<Array<AppointmentPersonModel>> = new BehaviorSubject( [] );
 
     personSchedules: Array<PersonScheduleModel> = [];
-    personSchedulesChange$ = new Subject(); //Subject<Array<PersonScheduleModel>> | Subject<PersonScheduleModel>
+    personSchedulesChange$:BehaviorSubject<Array<PersonScheduleModel>|PersonScheduleModel> = new BehaviorSubject([]);
 
     componentRefreshRef: () => void;
 
@@ -176,7 +176,7 @@ export class AppointmentSchedulerService {
         for (let i = 0; i < this.hours.length; i++) {
             let hour = this.hours[i];
             hoursW15.push(hour);
-            let hourW15 = moment(hour, 'LT', true).add(15, 'minutes').format('LT');
+            let hourW15 = moment(hour, 'h:mm A', true).add(15, 'minutes').format('h:mm A');
             hoursW15.push(hourW15);
         }
 

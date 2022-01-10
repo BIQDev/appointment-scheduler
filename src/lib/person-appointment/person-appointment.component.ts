@@ -74,7 +74,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
         takeUntil(this.stop$),
         filter( e => {
           let schedule: PersonScheduleModel;
-          if ( Array.isArray(e) ) {
+          if ( Array.isArray(e) && e.length ) {
             schedule = e[0] as PersonScheduleModel;
           } else {
             schedule = e as PersonScheduleModel;
@@ -101,7 +101,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
 
   hourMarkerShow(e, hour: string) {
     const hourMarkerEl = this.biqPersonAppointmentEl.nativeElement.querySelector('#hour-marker');
-    let date = moment(hour, 'LT', true);
+    let date = moment(hour, 'h:mm A', true);
     if (e.target.classList.contains('hour-item__15minutes')) {
       date.add(15, 'minutes');
     }
@@ -118,7 +118,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
     setTimeout(() => {
       const isHovered = e.target.dataset.biqIsHovered === 'true';
       if (isHovered) {
-        gsap.to(hourMarkerEl, { duration: 0.2, top: `${e.target.offsetTop}px`, text: date.format('LT') });
+        gsap.to(hourMarkerEl, { duration: 0.2, top: `${e.target.offsetTop}px`, text: date.format('h:mm A') });
         gsap.to(hourMarkerEl, { duration: 0.4, autoAlpha: 1, display: 'flex' });
       }
     }, timeout);
@@ -135,7 +135,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
 
   onHourClick(e, appointmentHour) {
     const hourMarkerEl = this.biqPersonAppointmentEl.nativeElement.querySelector('#hour-marker');
-    let date = moment(appointmentHour, 'LT', true);
+    let date = moment(appointmentHour, 'h:mm A', true);
     if (e.target.classList.contains('hour-item__15minutes')) {
       date.add(15, 'minutes');
     }
@@ -146,7 +146,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
         this.service.getModalConfig(),
         {
           appointmentDate: this.service.getAppointmentDate(),
-          appointmentHour: date.format('LT'),
+          appointmentHour: date.format('h:mm A'),
           appointmentPerson: this.personRecord
         }
       )
@@ -186,7 +186,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
   appointmentHourItemRender( rec: PersonScheduleModel ):string {
     let timeStart = `${rec.hourStart}:${rec.minutesStart}`;
     let timeEnd = `${rec.hourEnd}:${rec.minutesEnd}`;
-    return moment(timeStart, 'kk:mm').format('LT') + ' to ' + moment(timeEnd, 'kk:mm').format('LT');
+    return moment(timeStart, 'k:mm').format('h:mm A') + ' to ' + moment(timeEnd, 'k:mm').format('h:mm A');
   }
 
   ngAfterViewInit() {
