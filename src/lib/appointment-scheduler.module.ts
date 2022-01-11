@@ -18,6 +18,7 @@ import { AppointmentSchedulerModalComponent } from './appointment-scheduler-moda
 import { BiqMomentPipe } from './pipes/biq-moment.pipe';
 import { BiqMinsToHoursPipe } from './pipes/mins-to-hours.pipe';
 import { BiqJsonSerializePipe } from './pipes/json-serialize.pipe';
+import { AppointmentSchedulerService } from './appointment-scheduler.service';
 
 gsap.registerPlugin(Draggable, TextPlugin);
 
@@ -38,7 +39,8 @@ gsap.registerPlugin(Draggable, TextPlugin);
     ModalModule.forRoot()
   ],
   providers: [
-    { provide: BsDatepickerConfig, useFactory: getDatepickerConfig }
+    { provide: BsDatepickerConfig, useFactory: getDatepickerConfig },
+    AppointmentSchedulerService
   ]
 })
 export class AppointmentSchedulerModule { }
