@@ -26,7 +26,7 @@ const meetAndGreetInputs: Array<Array<InputModel>> = [
       label: `Contact No`,
       name: `contactNo`,
       required: true,
-      type: InputTypeEnum.Text,
+      type: InputTypeEnum.TextNumberOnly,
     },
     {
       label: `Relationship to Patient`,
@@ -76,6 +76,12 @@ const onboardParentInputs: Array<Array<InputModel>> = [
     }
   ],
   [
+    {
+      label: `DOB`,
+      name: `dob`,
+      required: true,
+      type: InputTypeEnum.Date,
+    },
     {
       label: `Test Input`,
       name: `test`,

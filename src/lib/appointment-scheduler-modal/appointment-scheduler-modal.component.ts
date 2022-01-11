@@ -77,6 +77,7 @@ export class AppointmentSchedulerModalComponent implements OnInit {
         switch( input.type ) {
           case InputTypeEnum.Text:
           case InputTypeEnum.TextNumberOnly:
+          case InputTypeEnum.Date:
             ctrl = input.required ? 
               new FormControl( '', Validators.required )
               : new FormControl( '' )

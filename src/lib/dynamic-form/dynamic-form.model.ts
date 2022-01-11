@@ -1,6 +1,7 @@
 export enum InputTypeEnum {
     Text = 'text',
     TextNumberOnly = 'text-number-only',
+    Date = 'date',
     Select = 'select',
 }
 
