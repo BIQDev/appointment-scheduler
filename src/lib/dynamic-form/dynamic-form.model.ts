@@ -1,5 +1,6 @@
 export enum InputTypeEnum {
     Text = 'text',
+    TextNumberOnly = 'text-number-only',
     Select = 'select',
 }
 

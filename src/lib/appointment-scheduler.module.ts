@@ -4,8 +4,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { gsap } from 'gsap';
-import { Draggable } from "gsap/Draggable";
-import { TextPlugin } from "gsap/TextPlugin";
+import { Draggable } from 'gsap/Draggable';
+import { TextPlugin } from 'gsap/TextPlugin';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { getDatepickerConfig } from './bs-config';
@@ -21,6 +22,7 @@ import { BiqJsonSerializePipe } from './pipes/json-serialize.pipe';
 import { AppointmentSchedulerService } from './appointment-scheduler.service';
 
 gsap.registerPlugin(Draggable, TextPlugin);
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 
 @NgModule({
@@ -36,7 +38,8 @@ gsap.registerPlugin(Draggable, TextPlugin);
     FormsModule, ReactiveFormsModule,
     FontAwesomeModule,
     BsDatepickerModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     { provide: BsDatepickerConfig, useFactory: getDatepickerConfig },

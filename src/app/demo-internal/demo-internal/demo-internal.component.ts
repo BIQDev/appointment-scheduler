@@ -66,7 +66,7 @@ const onboardParentInputs: Array<Array<InputModel>> = [
       label: `Contact No`,
       name: `contactNo`,
       required: true,
-      type: InputTypeEnum.Text,
+      type: InputTypeEnum.TextNumberOnly,
     },
     {
       label: `Relationship to Patient`,

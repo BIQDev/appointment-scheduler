@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@biqdev/ng-helper@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@biqdev/ng-helper/-/ng-helper-0.0.5.tgz#7be28355586ecf086fd577bb51463b421f6385b5"
-  integrity sha512-lr3weqqH+d5wmiTyi2EjFDglHSF8v7HF4TvJSdtUHUOPxkact577vD7gV3addYBhfbDxUYws1dflvilANNsFjA==
+ngx-mask@^8.0.1:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-mask/-/ngx-mask-8.2.0.tgz#1eac06d96d09fc62dd6f4b3f285f7fca50838d08"
+  integrity sha512-eWEnaHnLz3x/OuI8HVrmGciR2U84c/GoNjyUwCHxhskHevMuCPJRnbHag19ggQJKaTjmzpP+LyPHslOqPgbQ5w==
   dependencies:
     tslib "^1.9.0"
 

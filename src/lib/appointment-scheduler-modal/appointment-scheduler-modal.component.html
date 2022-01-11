@@ -92,6 +92,11 @@
                                 [attr.id]="input.name + '-Input'"
                                 [attr.name]="input.name" [formControlName]="input.name" />
 
+                            <input *ngSwitchCase="'text-number-only'" type="text" class="form-control"
+                                [attr.id]="input.name + '-Input'"
+                                mask="0*"
+                                [attr.name]="input.name" [formControlName]="input.name" />
+
                         </ng-container>
                     </div>
                 </div>
