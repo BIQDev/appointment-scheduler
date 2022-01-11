@@ -1,6 +1,5 @@
 <form #formAppointmentRef="ngForm" [formGroup]="formAppointment" (ngSubmit)="submit()"
-    style="display: flex; flex-direction: column; max-height: calc(100vh - 3.5rem);"
-    >
+    style="display: flex; flex-direction: column; max-height: calc(100vh - 3.5rem);">
     <div class="modal-header">
         <h5 class="modal-title pull-left">New Appointment</h5>
         <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
@@ -12,16 +11,15 @@
 
         <div class="form-group">
             <label for="appointmentPurpose">Purpose <span class="text-danger">*</span></label>
-            <select class="custom-select custom-select-sm"
-                id="appointmentPurpose"
-                name="purpose"
-                formControlName="purpose">
+            <select class="custom-select custom-select-sm" id="appointmentPurpose" name="purpose"
+                (change)="purposeChange($event)" formControlName="purpose">
                 <option [ngValue]="null" [disabled]="true">Please select purpose</option>
                 <option *ngFor="let purpose of list.purposes" [ngValue]="purpose.value">
                     {{ purpose.label }}
                 </option>
             </select>
-            <small class="form-text text-danger" *ngIf="formAppointmentRef.submitted && formAppointment.get('purpose').invalid">
+            <small class="form-text text-danger"
+                *ngIf="formAppointmentRef.submitted && formAppointment.get('purpose').invalid">
                 Purpose field is required
             </small>
         </div>
@@ -30,13 +28,9 @@
             <div class="form-row">
                 <div class="col-4">
                     <label for="appointmentDate">Date <span class="text-danger">*</span></label>
-                    <input class="form-control biq-readonly-datepicker" type="text"
-                        id="appointmentDate"
-                        formControlName="date"
-                        placeholder="Select Date"
-                        [readonly]="true"
-                        [isDisabled]="true"
-                        bsDatepicker/>
+                    <input class="form-control biq-readonly-datepicker" type="text" id="appointmentDate"
+                        formControlName="date" placeholder="Select Date" [readonly]="true" [isDisabled]="true"
+                        bsDatepicker />
                 </div>
             </div>
         </div>
@@ -77,36 +71,32 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <div class="form-row">
-                <div class="col-6">
-                    <label for="appointmentCallersName">Caller's name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="appointmentCallersName" name="callersName"
-                        formControlName="callersName" />
-                </div>
-                <div class="col-6">
-                    <label for="appointmentCallersEmail">Caller's email <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" id="appointmentCallersEmail" name="callersEmail"
-                        formControlName="callersEmail" />
-                </div>
-            </div>
-        </div>
+        <ng-container *ngIf="selectedPurposeInputs && selectedPurposeInputs.length">
+            <div class="form-group" *ngFor="let inputRow of selectedPurposeInputs">
+                <div class="form-row">
+                    <div [ngClass]="{ 'col-6': inputRow.length === 2 }" *ngFor="let input of inputRow">
+                        <label [attr.for]="input.name + '-Input'">{{input.label}} <span *ngIf="input.required" class="text-danger">*</span></label>
+                        <ng-container [ngSwitch]="input.type">
 
-        <div class="form-group">
-            <div class="form-row">
-                <div class="col-6">
-                    <label for="appointmentContactNo">Contact No <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="appointmentContactNo" name="contactNo"
-                        formControlName="contactNo" />
-                </div>
-                <div class="col-6">
-                    <label for="appointmentRelationship">Relationship to Patient <span
-                            class="text-danger">*</span></label>
-                    <input type="email" class="form-control" id="appointmentRelationship" name="relationship"
-                        formControlName="relationship" />
+                            <select *ngSwitchCase="'select'"
+                                [attr.id]="input.name + '-Input'"
+                                [attr.name]="input.name"
+                                class="custom-select custom-select-sm"
+                                [formControlName]="input.name">
+                                <option [ngValue]="null" [disabled]="true">{{input.select_placeholder}}</option>
+                                <option *ngFor="let option of input.select_options" [ngValue]="option.value">{{
+                                    option.label }}</option>
+                            </select>
+
+                            <input *ngSwitchCase="'text'" type="text" class="form-control"
+                                [attr.id]="input.name + '-Input'"
+                                [attr.name]="input.name" [formControlName]="input.name" />
+
+                        </ng-container>
+                    </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
 
     </div>
 
@@ -122,16 +112,12 @@
 
             <div class="custom-control custom-radio m-1">
                 <input type="radio" id="communicationMethodEmail" name="communicationMethod"
-                    class="custom-control-input"
-                    value="Email"
-                    formControlName="communicationMethod">
+                    class="custom-control-input" value="Email" formControlName="communicationMethod">
                 <label class="custom-control-label" for="communicationMethodEmail">Email</label>
             </div>
             <div class="custom-control custom-radio m-1">
-                <input type="radio" id="communicationMethodText" name="communicationMethod"
-                    class="custom-control-input"
-                    value="Text"
-                    formControlName="communicationMethod">
+                <input type="radio" id="communicationMethodText" name="communicationMethod" class="custom-control-input"
+                    value="Text" formControlName="communicationMethod">
                 <label class="custom-control-label" for="communicationMethodText">Text</label>
             </div>
 

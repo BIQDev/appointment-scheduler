@@ -3,7 +3,8 @@ import { biqHelper } from '@biqdev/ng-helper';
 import * as moment_ from 'moment';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
-import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, PersonScheduleModel, AppointmentTableConfigModel, AppointmentPersonFilterModel } from './appointment-scheduler.model';
+import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, PersonScheduleModel, AppointmentTableConfigModel, AppointmentPersonFilterModel, AppointmentPurposesModel } from './appointment-scheduler.model';
+import { InputModel } from './dynamic-form/dynamic-form.model';
 
 const moment = moment_;
 
@@ -80,6 +81,10 @@ export class AppointmentSchedulerService {
         this.appointmentDate = nextDate.toDate();
     }
 
+    setModalConfig(config: AppointmentModalConfigModel) {
+        this.appointmentConfigModal = Object.assign({}, config);
+    }
+
     getModalConfig(): AppointmentModalConfigModel {
         return Object.assign(
             {},
@@ -106,8 +111,28 @@ export class AppointmentSchedulerService {
         return '';
     }
 
-    setModalConfig(config: AppointmentModalConfigModel) {
-        this.appointmentConfigModal = Object.assign({}, config);
+    setAppointmentPurposeInputOptions(
+        purposeValue: string,
+        inputName: string,
+        option: Array<{ value: any; label: string;}> ) {
+        const purposes = this.appointmentConfigModal.purposes;
+        if ( purposes && purposes.length ) {
+            for ( let i = 0; i < purposes.length; i++ ) {
+                const purposeItem = purposes[i];
+                if ( purposeItem.value !== purposeValue ) continue;// If not match the value then skip
+
+                for ( let j = 0; j < purposeItem.inputs.length; j++ ) {
+                    const inputRow = purposeItem.inputs[j];
+                    for ( let k = 0; k < inputRow.length; k++ ) {
+                        const input = inputRow[k];
+                        if ( input && input.name === inputName ) {
+                            this.appointmentConfigModal.purposes[i].inputs[j][k].select_options = [...option];
+                        }
+                    }
+                }
+
+            }
+        }
     }
 
     setPersonList(personList: Array<AppointmentPersonModel>) {

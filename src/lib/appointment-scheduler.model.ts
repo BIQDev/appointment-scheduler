@@ -1,5 +1,6 @@
 import { BsModalRef } from "ngx-bootstrap/modal";
 import { AppointmentSchedulerService } from "./appointment-scheduler.service";
+import { InputModel } from "./dynamic-form";
 
 export interface AppointmentPersonModel {
     id: any;
@@ -53,8 +54,14 @@ export interface AppointmentModalSubmitModel {
     communicationMethod: string;
 }
 
+export interface AppointmentPurposesModel {
+    value: any;
+    label: any;
+    inputs: Array<Array<InputModel>>
+}
+
 export interface AppointmentModalConfigModel {
-    purposes?: Array<{ value: any; label: any; }>;
+    purposes?: Array<AppointmentPurposesModel>;
     personLabel?: string;
     persons?: Array<AppointmentPersonModel>;
     communicationDefault?: string;

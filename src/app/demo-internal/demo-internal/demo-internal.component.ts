@@ -3,6 +3,88 @@ import { AppointmentSchedulerService } from 'src/lib/appointment-scheduler.servi
 import { AppointmentConfigModel, AppointmentModalConfigModel, PersonScheduleModel } from 'src/lib/appointment-scheduler.model';
 import { AppointmentPersonModel } from 'src/lib/appointment-scheduler.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { InputModel, InputTypeEnum } from 'src/lib/dynamic-form/dynamic-form.model';
+
+
+const meetAndGreetInputs: Array<Array<InputModel>> = [
+  [
+    {
+      label: `Caller's name`,
+      name: `callersName`,
+      required: true,
+      type: InputTypeEnum.Text,
+    },
+    {
+      label: `Caller's email`,
+      name: `callersEmail`,
+      required: true,
+      type: InputTypeEnum.Text,
+    },
+  ],
+  [
+    {
+      label: `Contact No`,
+      name: `contactNo`,
+      required: true,
+      type: InputTypeEnum.Text,
+    },
+    {
+      label: `Relationship to Patient`,
+      name: `relationship`,
+      required: true,
+      type: InputTypeEnum.Text,
+    }
+  ],
+  [
+    {
+      label: `Test Input`,
+      name: `test`,
+      select_placeholder: `Please select test`,
+      required: true,
+      type: InputTypeEnum.Select,
+    }
+  ]
+]
+
+const onboardParentInputs: Array<Array<InputModel>> = [
+  [
+    {
+      label: `Caller's name`,
+      name: `callersName`,
+      required: true,
+      type: InputTypeEnum.Text,
+    },
+    {
+      label: `Caller's email`,
+      name: `callersEmail`,
+      required: true,
+      type: InputTypeEnum.Text,
+    },
+  ],
+  [
+    {
+      label: `Contact No`,
+      name: `contactNo`,
+      required: true,
+      type: InputTypeEnum.Text,
+    },
+    {
+      label: `Relationship to Patient`,
+      name: `relationship`,
+      required: true,
+      type: InputTypeEnum.Text,
+    }
+  ],
+  [
+    {
+      label: `Test Input`,
+      name: `test`,
+      select_placeholder: 'Please select test',
+      required: true,
+      type: InputTypeEnum.Select,
+    }
+  ]
+]
 
 @Component({
   selector: 'app-demo-internal',
@@ -23,12 +105,12 @@ export class DemoInternalComponent implements OnInit {
 
   appointmentModalConfig: AppointmentModalConfigModel = {
     purposes: [
-      { value: 'meet_greet', label: 'Meet & Greet' },
-      { value: 'onboard_parent', label: 'Onboard Parent' },
-      { value: 'onboard_patient', label: 'Onboard Patient' },
-      { value: 'follow_up_parent', label: 'Follow up parent' },
-      { value: 'follow_up_patient', label: 'Follow up patient' },
-      { value: 'other', label: 'Other' },
+      { value: 'meet_greet', label: 'Meet & Greet', inputs: meetAndGreetInputs },
+      { value: 'onboard_parent', label: 'Onboard Parent', inputs: onboardParentInputs },
+      { value: 'onboard_patient', label: 'Onboard Patient', inputs: meetAndGreetInputs },
+      { value: 'follow_up_parent', label: 'Follow up parent', inputs: meetAndGreetInputs },
+      { value: 'follow_up_patient', label: 'Follow up patient', inputs: meetAndGreetInputs },
+      { value: 'other', label: 'Other', inputs: meetAndGreetInputs },
     ],
     submitCallback: (data, valid, bsModalRef: BsModalRef) => {
       let time2: PersonScheduleModel = {
@@ -62,10 +144,13 @@ export class DemoInternalComponent implements OnInit {
         { id: 9, name: 'Izar' },
       ];
       this.appointmentService.setPersonList(personList);
+
+
+      this.appointmentService.setAppointmentPurposeInputOptions('onboard_parent', 'test', [{value: 1, label: 'One'}, {value: 2, label: 'Two'}]);
     }, 2000);
 
 
-    setTimeout( () => {
+    setTimeout(() => {
 
       let time1: PersonScheduleModel = {
         personId: 1,
