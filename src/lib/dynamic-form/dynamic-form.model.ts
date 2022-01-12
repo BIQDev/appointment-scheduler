@@ -1,3 +1,4 @@
+import { FormGroup } from "@angular/forms";
 import { INgxSelectOption } from "ngx-select-ex";
 
 export enum InputTypeEnum {
@@ -21,6 +22,6 @@ export interface InputModel {
     select_options?: Array<InputSelectOptionsModel>,//For InputTypeEnum.Select
     select_placeholder?: string,
     ngx_select_ex_items?: Array<InputSelectOptionsModel>,
-    ngx_select_ex_change?: (e: INgxSelectOption[]) => void;
+    ngx_select_ex_change?: (e: INgxSelectOption[], form: FormGroup) => void;
     ngx_select_placeholder?: string,
 }

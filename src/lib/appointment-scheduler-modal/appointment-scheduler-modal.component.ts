@@ -114,7 +114,7 @@ export class AppointmentSchedulerModalComponent implements OnInit {
   ngxSelectExChange( e: INgxSelectOption[], input: InputModel ) {
     const inputChangeCB = input.ngx_select_ex_change;
     if ( typeof inputChangeCB === 'function' ) {
-      inputChangeCB(e);
+      inputChangeCB(e, this.formAppointment);
     }
   }
 
