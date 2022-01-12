@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { biqHelper } from '@biqdev/ng-helper';
 import * as moment_ from 'moment';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { INgxSelectOption } from "ngx-select-ex";
+import { BehaviorSubject } from 'rxjs';
 
-import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, PersonScheduleModel, AppointmentTableConfigModel, AppointmentPersonFilterModel, AppointmentPurposesModel } from './appointment-scheduler.model';
-import { InputModel, InputTypeEnum } from './dynamic-form/dynamic-form.model';
+import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, PersonScheduleModel, AppointmentTableConfigModel, AppointmentPersonFilterModel } from './appointment-scheduler.model';
+import { InputTypeEnum } from './dynamic-form/dynamic-form.model';
 
 const moment = moment_;
 
@@ -114,7 +115,8 @@ export class AppointmentSchedulerService {
     setAppointmentPurposeInputOptions(
         purposeValue: string,
         inputName: string,
-        option: Array<{ value: any; label: string;}> ) {
+        option: Array<{ value: any; label: string;}>
+    ) {
         const purposes = this.appointmentConfigModal.purposes;
         if ( purposes && purposes.length ) {
             for ( let i = 0; i < purposes.length; i++ ) {
@@ -136,10 +138,11 @@ export class AppointmentSchedulerService {
     }
 
 
-    setAppointmentPurposeNgxSelectExOptions(
+    setAppointmentPurposeNgxSelectExItems(
         purposeValue: string,
         inputName: string,
-        option: Array<{ value: any; label: string;}> ) {
+        items: Array<{ value: any; label: string;}>
+    ) {
         const purposes = this.appointmentConfigModal.purposes;
         if ( purposes && purposes.length ) {
             for ( let i = 0; i < purposes.length; i++ ) {// Loop purpose model
@@ -151,7 +154,32 @@ export class AppointmentSchedulerService {
                     for ( let k = 0; k < inputRow.length; k++ ) {
                         const input = inputRow[k];
                         if ( input && input.name === inputName && input.type === InputTypeEnum.NgxSelectEx ) {
-                            this.appointmentConfigModal.purposes[i].inputs[j][k].ngx_select_ex_items = [...option];
+                            this.appointmentConfigModal.purposes[i].inputs[j][k].ngx_select_ex_items = [...items];
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    setAppointmentPurposeNgxSelectExCallback(
+        purposeValue: string,
+        inputName: string,
+        fn: (input: INgxSelectOption[] ) => void
+    ) {
+        const purposes = this.appointmentConfigModal.purposes;
+        if ( purposes && purposes.length ) {
+            for ( let i = 0; i < purposes.length; i++ ) {// Loop purpose model
+                const purposeItem = purposes[i];
+                if ( purposeItem.value !== purposeValue ) continue;// If not match the value then skip
+
+                for ( let j = 0; j < purposeItem.inputs.length; j++ ) {// Loop input model
+                    const inputRow = purposeItem.inputs[j];
+                    for ( let k = 0; k < inputRow.length; k++ ) {
+                        const input = inputRow[k];
+                        if ( input && input.name === inputName && input.type === InputTypeEnum.NgxSelectEx ) {
+                            this.appointmentConfigModal.purposes[i].inputs[j][k].ngx_select_ex_change = fn;
                         }
                     }
                 }

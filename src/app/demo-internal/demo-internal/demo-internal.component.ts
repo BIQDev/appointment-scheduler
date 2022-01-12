@@ -167,7 +167,7 @@ export class DemoInternalComponent implements OnInit {
 
       this.appointmentService.setAppointmentPurposeInputOptions('onboard_parent', 'test', [{value: 1, label: 'One'}, {value: 2, label: 'Two'}]);
 
-      this.appointmentService.setAppointmentPurposeNgxSelectExOptions(
+      this.appointmentService.setAppointmentPurposeNgxSelectExItems(
           'onboard_parent', 'ngx-select-ex',
           [
             { value: 1, label: 'One' },
