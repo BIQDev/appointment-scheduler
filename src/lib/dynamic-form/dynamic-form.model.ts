@@ -14,6 +14,13 @@ export interface InputSelectOptionsModel {
     label: string;
 }
 
+
+export interface NgxSelectExItemsModel {
+    value: any;
+    label: string;
+    data?: any; // If there any additional data necessary
+}
+
 export interface InputModel {
     label: string;
     name: string;
@@ -21,7 +28,7 @@ export interface InputModel {
     required: boolean,
     select_options?: Array<InputSelectOptionsModel>,//For InputTypeEnum.Select
     select_placeholder?: string,
-    ngx_select_ex_items?: Array<InputSelectOptionsModel>,
+    ngx_select_ex_items?: Array<NgxSelectExItemsModel>,
     ngx_select_ex_change?: (e: INgxSelectOption[], form: FormGroup) => void;
     ngx_select_placeholder?: string,
 }
