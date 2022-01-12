@@ -41,7 +41,7 @@ export interface PersonScheduleModel{
     callersName: string;
 }
 
-export interface AppointmentModalSubmitModel {
+/* export interface AppointmentModalSubmitModel {
     purpose: string;
     date: string;
     time: string;
@@ -52,7 +52,7 @@ export interface AppointmentModalSubmitModel {
     contactNo: string;
     relationShipToPatient: string;
     communicationMethod: string;
-}
+} */
 
 export interface AppointmentPurposesModel {
     value: any;
@@ -70,5 +70,5 @@ export interface AppointmentModalConfigModel {
     appointmentPerson?: AppointmentPersonModel;
     hours?: Array<any>;
     durations?: Array<string>;//In minutes
-    submitCallback?: ( data: AppointmentModalSubmitModel, valid: boolean, bsModalRef: BsModalRef ) => void;
+    submitCallback?: ( data: any, valid: boolean, bsModalRef: BsModalRef ) => void;
 }

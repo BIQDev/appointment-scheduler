@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { biqHelper } from '@biqdev/ng-helper';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { INgxSelectOption } from 'ngx-select-ex';
-import { AppointmentModalConfigModel, AppointmentModalSubmitModel } from '../appointment-scheduler.model';
+import { AppointmentModalConfigModel } from '../appointment-scheduler.model';
 import { InputModel, InputTypeEnum } from '../dynamic-form/dynamic-form.model';
 
 interface ModalListModel {
@@ -124,20 +124,7 @@ export class AppointmentSchedulerModalComponent implements OnInit {
       return;
     }
 
-    let controls = this.formAppointment.controls;
-
-    let submitData: AppointmentModalSubmitModel = {
-      purpose: controls.purpose.value,
-      date: controls.date.value,
-      time: controls.time.value,
-      duration: controls.duration.value,
-      personId: controls.person.value,
-      callersName: controls.callersName.value,
-      callersEmail: controls.callersEmail.value,
-      contactNo: controls.contactNo.value,
-      relationShipToPatient: controls.relationship.value,
-      communicationMethod: controls.communicationMethod.value,
-    };
+    let submitData: any = this.formAppointment.getRawValue();
 
     this.list.submitCallback(submitData, this.formAppointment.valid, this.bsModalRef);
 

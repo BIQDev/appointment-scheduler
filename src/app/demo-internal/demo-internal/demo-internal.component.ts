@@ -132,8 +132,9 @@ export class DemoInternalComponent implements OnInit {
       { value: 'other', label: 'Other', inputs: meetAndGreetInputs },
     ],
     submitCallback: (data, valid, bsModalRef: BsModalRef) => {
+      console.log(data);
       let time2: PersonScheduleModel = {
-        personId: data.personId,
+        personId: data.person,
         date: new Date(data.date),
         hourStart: 8,
         minutesStart: 15,
@@ -143,6 +144,7 @@ export class DemoInternalComponent implements OnInit {
         callersName: 'Rudi'
       }
       this.appointmentService.addPersonSchedule(time2);
+      console.log(this.appointmentService.personSchedules);
       bsModalRef.hide();
     }
   }
