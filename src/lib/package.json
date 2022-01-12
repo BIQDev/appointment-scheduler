@@ -1,6 +1,6 @@
 {
     "name": "@biqdev/appointment-scheduler",
-    "version": "0.0.41",
+    "version": "0.0.42",
     "license": "(ISC OR GPL-3.0)",
     "repository": "github:BIQDev/appointment-scheduler.git",
     "ngPackage": {

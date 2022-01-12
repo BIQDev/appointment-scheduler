@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { biqHelper } from '@biqdev/ng-helper';
 import * as moment_ from 'moment';
 import { INgxSelectOption } from "ngx-select-ex";
 import { BehaviorSubject } from 'rxjs';
 
 import { AppointmentModalConfigModel, AppointmentConfigModel, AppointmentPersonModel, PersonScheduleModel, AppointmentTableConfigModel, AppointmentPersonFilterModel } from './appointment-scheduler.model';
-import { InputTypeEnum } from './dynamic-form/dynamic-form.model';
+import { InputTypeEnum, NgxSelectExItemsModel } from './dynamic-form/dynamic-form.model';
 
 const moment = moment_;
 
@@ -141,7 +142,7 @@ export class AppointmentSchedulerService {
     setAppointmentPurposeNgxSelectExItems(
         purposeValue: string,
         inputName: string,
-        items: Array<{ value: any; label: string;}>
+        items: Array<NgxSelectExItemsModel>
     ) {
         const purposes = this.appointmentConfigModal.purposes;
         if ( purposes && purposes.length ) {
@@ -166,7 +167,7 @@ export class AppointmentSchedulerService {
     setAppointmentPurposeNgxSelectExCallback(
         purposeValue: string,
         inputName: string,
-        fn: (input: INgxSelectOption[] ) => void
+        fn: (input: INgxSelectOption[], form: FormGroup ) => void
     ) {
         const purposes = this.appointmentConfigModal.purposes;
         if ( purposes && purposes.length ) {
