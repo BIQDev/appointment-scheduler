@@ -74,14 +74,14 @@
         <ng-container *ngIf="selectedPurposeInputs && selectedPurposeInputs.length">
             <div class="form-group" *ngFor="let inputRow of selectedPurposeInputs">
                 <div class="form-row">
-                    <div [ngClass]="{ 'col-6': inputRow.length === 2 }" *ngFor="let input of inputRow">
+                    <div [ngClass]="{ 'col-6': inputRow.length === 2, 'col-12': inputRow.length === 1 }" *ngFor="let input of inputRow">
                         <label [attr.for]="input.name + '-Input'">{{input.label}} <span *ngIf="input.required" class="text-danger">*</span></label>
                         <ng-container [ngSwitch]="input.type">
 
                             <select *ngSwitchCase="'select'"
                                 [attr.id]="input.name + '-Input'"
                                 [attr.name]="input.name"
-                                class="custom-select custom-select-sm"
+                                class="custom-select custom-select-md"
                                 [formControlName]="input.name">
                                 <option [ngValue]="null" [disabled]="true">{{input.select_placeholder}}</option>
                                 <option *ngFor="let option of input.select_options" [ngValue]="option.value">{{
