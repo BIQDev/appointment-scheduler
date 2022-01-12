@@ -189,6 +189,29 @@ export class AppointmentSchedulerService {
         }
     }
 
+    getAppointmentPurposeInputNames(
+        purposeValue: string
+    ) : Array<string> {
+        const names: Array<string> = [];
+        const purposes = this.appointmentConfigModal.purposes;
+        if ( purposes && purposes.length ) {
+            for ( let i = 0; i < purposes.length; i++ ) {// Loop purpose model
+                const purposeItem = purposes[i];
+                if ( purposeItem.value !== purposeValue ) continue;// If not match the value then skip
+
+                for ( let j = 0; j < purposeItem.inputs.length; j++ ) {// Loop input model
+                    const inputRow = purposeItem.inputs[j];
+                    for ( let k = 0; k < inputRow.length; k++ ) {
+                        const input = inputRow[k];
+                        names.push(input.name);
+                    }
+                }
+
+            }
+        }
+        return names;
+    }
+
 
     setPersonList(personList: Array<AppointmentPersonModel>) {
         this.personList = [...personList];

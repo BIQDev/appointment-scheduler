@@ -61,14 +61,22 @@
         <div class="form-group">
             <label for="appointmentPerson">{{ list.personLabel ? list.personLabel : 'Person' }} <span
                     class="text-danger">*</span></label>
-            <select class="custom-select custom-select-sm" id="appointmentPerson" name="person"
-                formControlName="person">
-                <option [ngValue]="null" [disabled]="true">Please select {{ (list.personLabel ? list.personLabel :
-                    'Person') | lowercase }}</option>
-                <option *ngFor="let person of list.persons" [ngValue]="person.id">
-                    {{person.name}}
-                </option>
-            </select>
+
+                <ngx-select [allowClear]="true" id="appointmentPerson" [items]="list.persons"
+                    optionValueField="id" optionTextField="name"
+                    formControlName="person"
+                    [placeholder]="'Please select ' + ( list.personLabel? list.personLabel : 'Person' ).toLocaleLowerCase()">
+
+                    <ng-template ngx-select-option ngx-select-option-selected let-option let-text="text">
+                        <span [innerHtml]="text"></span>
+                    </ng-template>
+
+                    <ng-template ngx-select-option-not-found let-input>
+                        "{{input}}" not found
+                    </ng-template>
+
+                </ngx-select>
+
         </div>
 
         <ng-container *ngIf="selectedPurposeInputs && selectedPurposeInputs.length">
