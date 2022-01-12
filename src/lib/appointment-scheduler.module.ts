@@ -7,6 +7,7 @@ import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { NgxSelectModule } from 'ngx-select-ex';
 
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { getDatepickerConfig } from './bs-config';
@@ -40,6 +41,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     NgxMaskModule.forRoot(),
+    NgxSelectModule,
   ],
   providers: [
     { provide: BsDatepickerConfig, useFactory: getDatepickerConfig },

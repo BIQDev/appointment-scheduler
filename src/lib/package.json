@@ -1,6 +1,6 @@
 {
     "name": "@biqdev/appointment-scheduler",
-    "version": "0.0.37",
+    "version": "0.0.38",
     "license": "(ISC OR GPL-3.0)",
     "repository": "github:BIQDev/appointment-scheduler.git",
     "ngPackage": {
@@ -22,6 +22,7 @@
         "moment": "2.22.2",
         "ngx-bootstrap": "^5.5.0",
         "ngx-mask": "^8.0.1",
+        "ngx-select-ex": "^7.0.1",
         "rxjs": "~6.4.0"
     }
 }

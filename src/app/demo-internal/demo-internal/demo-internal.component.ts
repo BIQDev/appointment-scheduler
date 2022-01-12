@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { INgxSelectOption } from "ngx-select-ex";
 import { AppointmentSchedulerService } from 'src/lib/appointment-scheduler.service';
 import { AppointmentConfigModel, AppointmentModalConfigModel, PersonScheduleModel } from 'src/lib/appointment-scheduler.model';
 import { AppointmentPersonModel } from 'src/lib/appointment-scheduler.model';
@@ -89,6 +90,18 @@ const onboardParentInputs: Array<Array<InputModel>> = [
       required: true,
       type: InputTypeEnum.Select,
     }
+  ],
+  [
+    {
+      label: `Ngx Select Ex`,
+      name: `ngx-select-ex`,
+      required: true,
+      type: InputTypeEnum.NgxSelectEx,
+      ngx_select_placeholder: 'Please try :)',
+      ngx_select_ex_change: (input: INgxSelectOption[] ) => {
+        console.log(input[0].data);
+      }
+    }
   ]
 ]
 
@@ -153,6 +166,15 @@ export class DemoInternalComponent implements OnInit {
 
 
       this.appointmentService.setAppointmentPurposeInputOptions('onboard_parent', 'test', [{value: 1, label: 'One'}, {value: 2, label: 'Two'}]);
+
+      this.appointmentService.setAppointmentPurposeNgxSelectExOptions(
+          'onboard_parent', 'ngx-select-ex',
+          [
+            { value: 1, label: 'One' },
+            { value: 2, label: 'Two' },
+            { value: 3, label: 'Thre' },
+          ]
+        );
     }, 2000);
 
 

@@ -74,35 +74,47 @@
         <ng-container *ngIf="selectedPurposeInputs && selectedPurposeInputs.length">
             <div class="form-group" *ngFor="let inputRow of selectedPurposeInputs">
                 <div class="form-row">
-                    <div [ngClass]="{ 'col-6': inputRow.length === 2, 'col-12': inputRow.length === 1 }" *ngFor="let input of inputRow">
-                        <label [attr.for]="input.name + '-Input'">{{input.label}} <span *ngIf="input.required" class="text-danger">*</span></label>
+                    <div [ngClass]="{ 'col-6': inputRow.length === 2, 'col-12': inputRow.length === 1 }"
+                        *ngFor="let input of inputRow">
+                        <label [attr.for]="input.name + '-Input'">{{input.label}} <span *ngIf="input.required"
+                                class="text-danger">*</span></label>
                         <ng-container [ngSwitch]="input.type">
 
-                            <select *ngSwitchCase="'select'"
-                                [attr.id]="input.name + '-Input'"
-                                [attr.name]="input.name"
-                                class="custom-select custom-select-md"
-                                [formControlName]="input.name">
+                            <select *ngSwitchCase="'select'" [attr.id]="input.name + '-Input'" [attr.name]="input.name"
+                                class="custom-select custom-select-md" [formControlName]="input.name">
                                 <option [ngValue]="null" [disabled]="true">{{input.select_placeholder}}</option>
                                 <option *ngFor="let option of input.select_options" [ngValue]="option.value">{{
                                     option.label }}</option>
                             </select>
 
+                            <ngx-select *ngSwitchCase="'ngx-select-ex'" [allowClear]="true" [items]="input.ngx_select_ex_items"
+                                optionValueField="value" optionTextField="label"
+                                [formControlName]="input.name"
+                                (selectionChanges)="ngxSelectExChange($event, input)"
+                                [placeholder]="input.ngx_select_placeholder">
+
+                                <ng-template ngx-select-option ngx-select-option-selected let-option let-text="text">
+                                    <span [innerHtml]="text"></span>
+                                </ng-template>
+
+                                <ng-template ngx-select-option-not-found let-input>
+                                    "{{input}}" not found
+                                </ng-template>
+
+                            </ngx-select>
+
                             <input *ngSwitchCase="'text'" type="text" class="form-control"
-                                [attr.id]="input.name + '-Input'"
-                                [attr.name]="input.name" [formControlName]="input.name" />
+                                [attr.id]="input.name + '-Input'" [attr.name]="input.name"
+                                [formControlName]="input.name" />
 
                             <input *ngSwitchCase="'text-number-only'" type="text" class="form-control"
-                                [attr.id]="input.name + '-Input'"
-                                mask="0*"
-                                [attr.name]="input.name" [formControlName]="input.name" />
-                            
-                            <input *ngSwitchCase="'date'" class="form-control biq-readonly-datepicker" type="text" 
-                                placeholder="Select Date" [readonly]="true"
-                                [attr.id]="input.name + '-Input'"
+                                [attr.id]="input.name + '-Input'" mask="0*" [attr.name]="input.name"
+                                [formControlName]="input.name" />
+
+                            <input *ngSwitchCase="'date'" class="form-control biq-readonly-datepicker" type="text"
+                                placeholder="Select Date" [readonly]="true" [attr.id]="input.name + '-Input'"
                                 [attr.name]="input.name" [formControlName]="input.name"
-                                [bsConfig]="{adaptivePosition: true}"
-                                bsDatepicker />
+                                [bsConfig]="{adaptivePosition: true}" bsDatepicker />
 
                         </ng-container>
                     </div>

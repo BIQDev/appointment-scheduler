@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { biqHelper } from '@biqdev/ng-helper';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { INgxSelectOption } from 'ngx-select-ex';
 import { AppointmentModalConfigModel, AppointmentModalSubmitModel } from '../appointment-scheduler.model';
 import { InputModel, InputTypeEnum } from '../dynamic-form/dynamic-form.model';
 
@@ -83,6 +84,7 @@ export class AppointmentSchedulerModalComponent implements OnInit {
               : new FormControl( '' )
             break;
           case InputTypeEnum.Select:
+          case InputTypeEnum.NgxSelectEx:
             ctrl = input.required ?
               new FormControl( null, Validators.required )
               : new FormControl( null )
@@ -107,6 +109,13 @@ export class AppointmentSchedulerModalComponent implements OnInit {
       }
     }
 
+  }
+
+  ngxSelectExChange( e: INgxSelectOption[], input: InputModel ) {
+    const inputChangeCB = input.ngx_select_ex_change;
+    if ( typeof inputChangeCB === 'function' ) {
+      inputChangeCB(e);
+    }
   }
 
   submit() {
