@@ -24,7 +24,7 @@ export interface AppointmentConfigModel {
     tableHeight?: string;
     personListChangeCallback?: (personId: any) => void;
     dateChangeCallback?: (date: Date) => void;
-    detailRenderFn: (data: PersonScheduleModel) => Array<AppointmentDetailRecordModel>;
+    appointmentDetailRenderFn: (data: PersonScheduleModel) => Array<AppointmentDetailRecordModel>;
     appointmentCancelFn: (data: PersonScheduleModel, modalRef: BsModalRef) => void;
     appointmentRescheduleFn: (data: PersonScheduleModel, modalRef: BsModalRef) => void;
 }

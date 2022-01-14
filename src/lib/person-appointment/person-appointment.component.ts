@@ -198,7 +198,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
       AppointmentDetailModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable' }
     );
     this.appointmentDetailModalRef.content.data = {...elData};
-    this.appointmentDetailModalRef.content.renderData = this.service.getConfig().detailRenderFn( elData );
+    this.appointmentDetailModalRef.content.renderData = this.service.getConfig().appointmentDetailRenderFn( elData );
     this.appointmentDetailModalRef.content.appointmentCancelCB = this.service.getConfig().appointmentCancelFn;
     this.appointmentDetailModalRef.content.appointmentRescheduleCB = this.service.getConfig().appointmentRescheduleFn;
   }

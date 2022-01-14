@@ -12,7 +12,7 @@ const moment = moment_;
 
 const appointmentConfigDefault: AppointmentConfigModel = {
     personSelectDisabled: false,
-    detailRenderFn: (data: PersonScheduleModel) => [],
+    appointmentDetailRenderFn: (data: PersonScheduleModel) => [],
     appointmentCancelFn: () => null,
     appointmentRescheduleFn: () => null,
 }

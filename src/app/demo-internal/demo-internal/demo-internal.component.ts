@@ -125,7 +125,7 @@ export class DemoInternalComponent implements OnInit {
     dateChangeCallback: (date: Date) => {
       console.log(date);
     },
-    detailRenderFn: this.appointmentDetailRender.bind(this),
+    appointmentDetailRenderFn: this.appointmentDetailRender.bind(this),
     appointmentCancelFn: (data: PersonScheduleModel, modalRef: BsModalRef) => {
       let confirm = window.confirm('Are you sure?');
       if ( confirm ) {
