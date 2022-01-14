@@ -12,6 +12,7 @@ import { AppointmentPersonModel, PersonScheduleModel } from '../appointment-sche
 import { AppointmentSchedulerModalComponent } from '../appointment-scheduler-modal/appointment-scheduler-modal.component';
 import { biqHelper } from '@biqdev/ng-helper';
 import { Subject } from 'rxjs';
+import { AppointmentDetailModalComponent } from '../appointment-detail-modal/appointment-detail-modal.component';
 
 const moment = moment_;
 
@@ -30,7 +31,8 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
   @ViewChildren("appointmentEls")
   appointmentEls: QueryList<ElementRef>;
 
-  bsModalRef: BsModalRef;
+  appointmentInputModalRef: BsModalRef;
+  appointmentDetailModalRef: BsModalRef;
 
   faUser = faUser;
 
@@ -72,21 +74,21 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
     this.service.personSchedulesChange$
       .pipe(
         takeUntil(this.stop$),
-        filter( e => {
+        filter(e => {
           let schedule: PersonScheduleModel;
-          if ( Array.isArray(e) && e.length ) {
+          if (Array.isArray(e) && e.length) {
             schedule = e[0] as PersonScheduleModel;
           } else {
             schedule = e as PersonScheduleModel;
           }
           return schedule.personId === this.personRecord.id;
-        } )
+        })
       )
-      .subscribe( res => {
+      .subscribe(res => {
         let time: PersonScheduleModel = res as PersonScheduleModel;
         this.cdr.detectChanges()
         this.appointmentsChanges();
-      } );
+      });
   }
 
   ngOnDestroy() {
@@ -94,7 +96,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
     this.stop$.complete();
   }
 
-  getAppointments() : Array<PersonScheduleModel> {
+  getAppointments(): Array<PersonScheduleModel> {
     return this.service.personSchedules
       .filter(e => e.personId === this.personRecord.id);
   }
@@ -151,31 +153,31 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
         }
       )
     }
-    this.bsModalRef = this.modalService.show(AppointmentSchedulerModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable', initialState });
-    this.bsModalRef.content.closeBtnName = 'Close';
+    this.appointmentInputModalRef = this.modalService.show(AppointmentSchedulerModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable', initialState });
   }
 
-  appointmentsChanges( filter: PersonScheduleModel = null ) {
-    this.appointmentEls.filter( e => {
-      if ( biqHelper.isNull(filter) ) {
+  appointmentsChanges(filter: PersonScheduleModel = null) {
+    this.appointmentEls.filter(e => {
+      if (biqHelper.isNull(filter)) {
         return true;
       }
 
       const elData: PersonScheduleModel = biqHelper.JSON.parse(e.nativeElement.getAttribute('data-appointment')) as PersonScheduleModel;
+      elData.date = moment(elData.date).toDate();
       return _.isEqual(elData, filter);
-    } )
+    })
       .forEach(e => {
         let el = e.nativeElement;
         const tableConfig = this.service.getTableConfig();
         let data = el.getAttribute('data-appointment');
         let record: PersonScheduleModel = biqHelper.JSON.parse(data, true) as PersonScheduleModel;
-        let top: number = ( (record.hourStart+(record.minutesStart/60)) - 8) * tableConfig.rowHeight * 4;
+        let top: number = ((record.hourStart + (record.minutesStart / 60)) - 8) * tableConfig.rowHeight * 4;
         let initialTop: number = top - 50;
         el.style.top = `${initialTop}px`;
 
         const durationMins: number = ((record.hourEnd * 60) + record.minutesEnd) - ((record.hourStart * 60) + record.minutesStart);
 
-        let height: number = (durationMins / 15 * tableConfig.rowHeight ) - 2;//-2 for spacing
+        let height: number = (durationMins / 15 * tableConfig.rowHeight) - 2;//-2 for spacing
         height = height >= 0 ? height : 3;
 
         const delay: number = this.isAfterViewInit ? 0 : 0.8;
@@ -183,10 +185,22 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
       });
   }
 
-  appointmentHourItemRender( rec: PersonScheduleModel ):string {
+  appointmentHourItemRender(rec: PersonScheduleModel): string {
     let timeStart = `${rec.hourStart}:${rec.minutesStart}`;
     let timeEnd = `${rec.hourEnd}:${rec.minutesEnd}`;
     return moment(timeStart, 'k:mm').format('h:mm A') + ' to ' + moment(timeEnd, 'k:mm').format('h:mm A');
+  }
+
+  appointmentClick(e) {
+    const elData: PersonScheduleModel = biqHelper.JSON.parse(e.currentTarget.getAttribute('data-appointment')) as PersonScheduleModel;
+    elData.date = moment(elData.date).toDate();
+    this.appointmentDetailModalRef = this.modalService.show(
+      AppointmentDetailModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable' }
+    );
+    this.appointmentDetailModalRef.content.data = {...elData};
+    this.appointmentDetailModalRef.content.renderData = this.service.getConfig().detailRenderFn( elData );
+    this.appointmentDetailModalRef.content.appointmentCancelCB = this.service.getConfig().appointmentCancelFn;
+    this.appointmentDetailModalRef.content.appointmentRescheduleCB = this.service.getConfig().appointmentRescheduleFn;
   }
 
   ngAfterViewInit() {

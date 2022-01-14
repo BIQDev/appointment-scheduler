@@ -11,7 +11,10 @@ import { InputTypeEnum, NgxSelectExItemsModel } from './dynamic-form/dynamic-for
 const moment = moment_;
 
 const appointmentConfigDefault: AppointmentConfigModel = {
-    personSelectDisabled: false
+    personSelectDisabled: false,
+    detailRenderFn: (data: PersonScheduleModel) => [],
+    appointmentCancelFn: () => null,
+    appointmentRescheduleFn: () => null,
 }
 
 const appointmentConfigModalDefault: AppointmentModalConfigModel = {
@@ -288,12 +291,26 @@ export class AppointmentSchedulerService {
 
     addPersonSchedule(record: PersonScheduleModel) {
         this.personSchedules = [ ...this.personSchedules, record ];
-        this.personSchedulesChange$.next(record);
+        this.personSchedulesChange$.next({...record});
     }
 
     setPersonSchedule(records: Array<PersonScheduleModel>) {
         this.personSchedules = [ ...records ];
-        this.personSchedulesChange$.next(records);
+        this.personSchedulesChange$.next([...records]);
+    }
+
+    deletePersonSchedule(record: PersonScheduleModel) {
+        const newSchedules: Array<PersonScheduleModel> = this.personSchedules
+            .filter( el => {
+                return !(el.personId === record.personId
+                    && moment(el.date).isSame(record.date)
+                    && el.hourStart === record.hourStart
+                    && el.minutesStart === record.minutesStart
+                    && el.hourEnd === record.hourEnd
+                    && el.minutesEnd === record.minutesEnd);
+            } );
+        this.personSchedules = [...newSchedules];
+        this.personSchedulesChange$.next([...newSchedules]);
     }
 
 }

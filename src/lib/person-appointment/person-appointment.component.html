@@ -25,6 +25,7 @@
 
         <div class="appointment-item" #appointmentEls
             (mouseenter)="hourMarkerHide()"
+            (click)="appointmentClick($event)"
             *ngFor="let appointment of getAppointments()"
             [attr.data-appointment]="(appointment|biqJsonSerialize)">
             <div class="appointment-item__inner">
@@ -32,7 +33,7 @@
                     {{appointmentHourItemRender(appointment)}}
                 </div>
                 <div class="description">
-                    {{ appointment.purpose }} {{ appointment.callersName }}
+                    {{ appointment.purpose }} Appointment with {{ appointment.name }}
                 </div>
             </div>
         </div>

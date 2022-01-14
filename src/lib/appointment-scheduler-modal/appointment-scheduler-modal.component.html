@@ -1,7 +1,7 @@
 <form #formAppointmentRef="ngForm" [formGroup]="formAppointment" (ngSubmit)="submit()"
     style="display: flex; flex-direction: column; max-height: calc(100vh - 3.5rem);">
     <div class="modal-header">
-        <h5 class="modal-title pull-left">New Appointment</h5>
+        <h5 class="modal-title pull-left">{{inputMode}} Appointment</h5>
         <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>

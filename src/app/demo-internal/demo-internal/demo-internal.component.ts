@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { INgxSelectOption } from "ngx-select-ex";
+import * as moment_ from 'moment';
+
 import { AppointmentSchedulerService } from 'src/lib/appointment-scheduler.service';
-import { AppointmentConfigModel, AppointmentModalConfigModel, PersonScheduleModel } from 'src/lib/appointment-scheduler.model';
+import { AppointmentConfigModel, AppointmentDetailRecordModel, AppointmentModalConfigModel, PersonScheduleModel } from 'src/lib/appointment-scheduler.model';
 import { AppointmentPersonModel } from 'src/lib/appointment-scheduler.model';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { InputModel, InputTypeEnum } from 'src/lib/dynamic-form/dynamic-form.model';
+import { AppointmentSchedulerModalComponent } from 'src/lib/appointment-scheduler-modal/appointment-scheduler-modal.component';
+
+const moment = moment_;
 
 
 const meetAndGreetInputs: Array<Array<InputModel>> = [
@@ -112,11 +117,26 @@ const onboardParentInputs: Array<Array<InputModel>> = [
 })
 export class DemoInternalComponent implements OnInit {
 
+  appointmentInputModal: BsModalRef;
+
   appointmentConfig: AppointmentConfigModel = {
     personAllShow: true,
     tableHeight: '500px',
     dateChangeCallback: (date: Date) => {
       console.log(date);
+    },
+    detailRenderFn: this.appointmentDetailRender.bind(this),
+    appointmentCancelFn: (data: PersonScheduleModel, modalRef: BsModalRef) => {
+      let confirm = window.confirm('Are you sure?');
+      if ( confirm ) {
+        this.appointmentService.deletePersonSchedule(data);
+        modalRef.hide();
+      }
+    },
+    appointmentRescheduleFn: (data: PersonScheduleModel, modalRef: BsModalRef) => {
+      this.appointmentInputModal = this.modalService.show(
+        AppointmentSchedulerModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable' }
+      );
     }
   };
 
@@ -141,7 +161,7 @@ export class DemoInternalComponent implements OnInit {
         hourEnd: 9,
         minutesEnd: 45,
         purpose: 'Meet and greet',
-        callersName: 'Rudi'
+        name: 'Rudi'
       }
       this.appointmentService.addPersonSchedule(time2);
       console.log(this.appointmentService.personSchedules);
@@ -149,7 +169,9 @@ export class DemoInternalComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor(
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -190,7 +212,9 @@ export class DemoInternalComponent implements OnInit {
         hourEnd: 12,
         minutesEnd: 0,
         purpose: 'Meet and greet',
-        callersName: 'Santoso'
+        name: 'Santoso',
+        patient_name: 'Something',
+        patient_contact: '085234234',
       }
       this.appointmentService.addPersonSchedule(time1);
 
@@ -202,10 +226,33 @@ export class DemoInternalComponent implements OnInit {
         hourEnd: 16,
         minutesEnd: 45,
         purpose: 'Onboard parent',
-        callersName: 'Paijo'
+        name: 'Paijo'
       }
       this.appointmentService.addPersonSchedule(time2);
     }, 500);
+  }
+
+  appointmentDetailRender(data: PersonScheduleModel) {
+    let renderData: Array<AppointmentDetailRecordModel>;
+
+    let timeStart = moment('00:00', 'hh:mm').add(data.hourStart, 'hour').add(data.minutesStart, 'minute');
+    let timeEnd = moment('00:00', 'hh:mm').add(data.hourEnd, 'hour').add(data.minutesEnd, 'minute');
+
+    let duration = timeEnd.diff(timeStart, 'minute');
+    let durationHour = duration / 60 | 0;
+    let durationMinute = duration % 60 | 0;
+    let durationText = `${durationHour !== 0 ? durationHour + ' Hour ' : ''}${durationMinute !== 0 ? durationMinute + ' mins' : ''}`;
+    let timeText = `${timeStart.format('h:mm a')} - ${timeEnd.format('h:mm a')} ( ${durationText} )`;
+
+    renderData = [
+      { label: 'Purpose', value: data.purpose },
+      { label: 'Coach', value: this.appointmentService.getPersonById(data.personId).name },
+      { label: 'Date', value: moment(data.date).format('MMM Do, dddd YYYY') },
+      { label: 'Time', value: timeText },
+      { label: 'Name', value: data.name }
+    ];
+
+    return renderData;
   }
 
   appointmentReady(e) {

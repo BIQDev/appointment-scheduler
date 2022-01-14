@@ -6,10 +6,6 @@ import { INgxSelectOption } from 'ngx-select-ex';
 import { AppointmentModalConfigModel } from '../appointment-scheduler.model';
 import { InputModel, InputTypeEnum } from '../dynamic-form/dynamic-form.model';
 
-interface ModalListModel {
-  appointmentModalConfig: AppointmentModalConfigModel;
-}
-
 @Component({
   selector: 'app-appointment-scheduler-modal',
   templateUrl: './appointment-scheduler-modal.component.html',
@@ -18,6 +14,7 @@ interface ModalListModel {
 export class AppointmentSchedulerModalComponent implements OnInit {
 
   list: AppointmentModalConfigModel = {};
+  inputMode: string = 'New';
 
   formAppointment = this.fb.group({
     purpose: [null, [Validators.required]],

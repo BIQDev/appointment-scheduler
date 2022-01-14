@@ -24,6 +24,9 @@ export interface AppointmentConfigModel {
     tableHeight?: string;
     personListChangeCallback?: (personId: any) => void;
     dateChangeCallback?: (date: Date) => void;
+    detailRenderFn: (data: PersonScheduleModel) => Array<AppointmentDetailRecordModel>;
+    appointmentCancelFn: (data: PersonScheduleModel, modalRef: BsModalRef) => void;
+    appointmentRescheduleFn: (data: PersonScheduleModel, modalRef: BsModalRef) => void;
 }
 
 export interface AppointmentReadyModel {
@@ -38,7 +41,9 @@ export interface PersonScheduleModel{
     hourEnd: number;
     minutesEnd: number;
     purpose: string;
-    callersName: string;
+    name: string;
+    purpose_value?: string;
+    [x: string]: any;
 }
 
 /* export interface AppointmentModalSubmitModel {
@@ -71,4 +76,9 @@ export interface AppointmentModalConfigModel {
     hours?: Array<any>;
     durations?: Array<string>;//In minutes
     submitCallback?: ( data: any, valid: boolean, bsModalRef: BsModalRef ) => void;
+}
+
+export interface AppointmentDetailRecordModel {
+    label: string;
+    value: any;
 }

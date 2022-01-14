@@ -81,10 +81,6 @@ export class AppointmentSchedulerComponent implements OnInit, OnDestroy {
     }
   }
 
-  getPersons() {
-
-  }
-
   dateChange( date: Date ) {
     this.service.setAppointmentDate( date );
     const callback = this.service.getConfig().dateChangeCallback;
@@ -110,7 +106,6 @@ export class AppointmentSchedulerComponent implements OnInit, OnDestroy {
       )
     }
     this.bsModalRef = this.modalService.show(AppointmentSchedulerModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable', initialState });
-    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
 }
