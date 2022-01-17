@@ -1,29 +1,31 @@
-<div class="modal-header">
-    <h5 class="modal-title pull-left">Appointment Details</h5>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<div style="display: flex; flex-direction: column; max-height: calc(100vh - 3.5rem);">
+    <div class="modal-header">
+        <h5 class="modal-title pull-left">Appointment Details</h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
-<div class="modal-body">
-    <div class="d-flex" *ngFor="let data of renderData">
-        <div class="d-flex align-items-center p-1 pr-5 text-uppercase text-dark" style="min-width: 150px;">
-            {{data.label}}
-        </div>
-        <div class="d-flex align-items-center flex-fill text-wrap text-break text-muted">
-            {{data.value}}
+    <div class="modal-body px-5">
+        <div class="detail-table d-flex" *ngFor="let data of renderData">
+            <div class="detail-table__label d-flex align-items-center p-1 pr-3 text-uppercase text-muted">
+                {{data.label}}
+            </div>
+            <div class="d-flex align-items-center flex-fill text-wrap text-break text-dark">
+                {{data.value}}
+            </div>
         </div>
     </div>
-</div>
 
-<div class="modal-footer">
-    <button type="button" class="btn btn-sm btn-outline-danger" (click)="appointmentCancel()">
-        Cancel
-    </button>
-    <button type="button" class="btn btn-sm btn-outline-info" (click)="appointmentReschedule()">
-        Reschedule
-    </button>
-    <button type="button" class="btn btn-sm btn-secondary" (click)="bsModalRef.hide()">
-        Close
-    </button>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-danger" (click)="appointmentCancel()">
+            Cancel
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-info" (click)="appointmentReschedule()">
+            Reschedule
+        </button>
+        <button type="button" class="btn btn-sm btn-secondary" (click)="bsModalRef.hide()">
+            Close
+        </button>
+    </div>
 </div>

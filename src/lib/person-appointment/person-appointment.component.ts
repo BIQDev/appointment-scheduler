@@ -195,7 +195,7 @@ export class PersonAppointmentComponent implements OnInit, OnDestroy, AfterViewI
     const elData: PersonScheduleModel = biqHelper.JSON.parse(e.currentTarget.getAttribute('data-appointment')) as PersonScheduleModel;
     elData.date = moment(elData.date).toDate();
     this.appointmentDetailModalRef = this.modalService.show(
-      AppointmentDetailModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable' }
+      AppointmentDetailModalComponent, { class: 'modal-lg modal-dialog-centered modal-dialog-scrollable' }
     );
     this.appointmentDetailModalRef.content.data = {...elData};
     this.appointmentDetailModalRef.content.renderData = this.service.getConfig().appointmentDetailRenderFn( elData );
