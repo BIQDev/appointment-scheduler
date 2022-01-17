@@ -18,6 +18,7 @@ const appointmentConfigDefault: AppointmentConfigModel = {
 }
 
 const appointmentConfigModalDefault: AppointmentModalConfigModel = {
+    inputMode: 'New',
     personLabel: 'Coach',
     communicationDefault: 'Email',
 }

@@ -66,6 +66,7 @@ export interface AppointmentPurposesModel {
 }
 
 export interface AppointmentModalConfigModel {
+    inputMode: string;
     purposes?: Array<AppointmentPurposesModel>;
     personLabel?: string;
     persons?: Array<AppointmentPersonModel>;

@@ -13,8 +13,9 @@ import { InputModel, InputTypeEnum } from '../dynamic-form/dynamic-form.model';
 })
 export class AppointmentSchedulerModalComponent implements OnInit {
 
-  list: AppointmentModalConfigModel = {};
-  inputMode: string = 'New';
+  list: AppointmentModalConfigModel = {
+    inputMode: 'New'
+  };
 
   formAppointment = this.fb.group({
     purpose: [null, [Validators.required]],
