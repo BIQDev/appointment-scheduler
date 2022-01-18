@@ -134,8 +134,23 @@ export class DemoInternalComponent implements OnInit {
       }
     },
     appointmentRescheduleFn: (data: PersonScheduleModel, modalRef: BsModalRef) => {
+      const initialState = {
+        list: Object.assign(
+          {},
+          this.appointmentService.getModalConfig(),
+          {
+            appointmentDate: this.appointmentService.getAppointmentDate(),
+            inputMode: 'Reschedule',
+            scheduleId: data.id,
+            formValues: {
+              purpose: 'meet_greet',
+              callersName: 'Bayu'
+            }
+          }
+        )
+      }
       this.appointmentInputModal = this.modalService.show(
-        AppointmentSchedulerModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable' }
+        AppointmentSchedulerModalComponent, { class: 'modal-md modal-dialog-centered modal-dialog-scrollable', initialState }
       );
     }
   };
@@ -144,6 +159,7 @@ export class DemoInternalComponent implements OnInit {
 
   appointmentModalConfig: AppointmentModalConfigModel = {
     inputMode: 'New',
+    formValues: {},
     purposes: [
       { value: 'meet_greet', label: 'Meet & Greet', inputs: meetAndGreetInputs },
       { value: 'onboard_parent', label: 'Onboard Parent', inputs: onboardParentInputs },

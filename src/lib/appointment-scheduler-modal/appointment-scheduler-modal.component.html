@@ -1,4 +1,4 @@
-<form #formAppointmentRef="ngForm" [formGroup]="formAppointment" (ngSubmit)="submit()"
+<form #formAppointmentRef="ngForm" #formAppointmentElRef [formGroup]="formAppointment" (ngSubmit)="submit()"
     style="display: flex; flex-direction: column; max-height: calc(100vh - 3.5rem);">
     <div class="modal-header">
         <h5 class="modal-title pull-left">{{list.inputMode}} Appointment</h5>

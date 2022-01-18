@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { biqHelper } from '@biqdev/ng-helper';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -13,8 +13,12 @@ import { InputModel, InputTypeEnum } from '../dynamic-form/dynamic-form.model';
 })
 export class AppointmentSchedulerModalComponent implements OnInit {
 
+  @ViewChild('formAppointmentElRef', {static: true})
+  formAppointmentElRef: ElementRef;
+
   list: AppointmentModalConfigModel = {
-    inputMode: 'New'
+    inputMode: 'New',
+    formValues: {},
   };
 
   formAppointment = this.fb.group({
@@ -31,6 +35,7 @@ export class AppointmentSchedulerModalComponent implements OnInit {
   constructor(
     public bsModalRef: BsModalRef,
     private fb: FormBuilder,
+    private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
@@ -46,6 +51,23 @@ export class AppointmentSchedulerModalComponent implements OnInit {
       this.formAppointment.controls.communicationMethod.setValue('Text');
     } else {
       this.formAppointment.controls.communicationMethod.setValue('Email');
+    }
+
+    if ( !biqHelper.isNull(this.list.formValues) ) {
+      if ( this.list.formValues.hasOwnProperty('purpose') ) {
+        this.formAppointment.get('purpose').setValue(this.list.formValues['purpose']);
+        this.formAppointmentElRef
+          .nativeElement.querySelector('#appointmentPurpose').dispatchEvent(new Event('change'));
+        this.cdr.detectChanges();
+      }
+      setTimeout(() => {
+        for ( let key in this.list.formValues ) {
+          if ( key === 'purpose' ) continue;
+          const formControl = this.formAppointment.get(key);
+          if (formControl)
+            formControl.setValue(this.list.formValues[key]);
+        }
+      }, 200);
     }
 
   }

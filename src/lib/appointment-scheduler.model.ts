@@ -67,6 +67,7 @@ export interface AppointmentPurposesModel {
 
 export interface AppointmentModalConfigModel {
     inputMode: string;
+    formValues: {[x:string]: any}; // Put empty object if no initial values need to be set
     purposes?: Array<AppointmentPurposesModel>;
     personLabel?: string;
     persons?: Array<AppointmentPersonModel>;
