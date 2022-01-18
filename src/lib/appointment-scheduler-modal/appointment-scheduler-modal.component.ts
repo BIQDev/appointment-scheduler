@@ -5,7 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { INgxSelectOption } from 'ngx-select-ex';
 import { AppointmentModalConfigModel } from '../appointment-scheduler.model';
 import { InputModel, InputTypeEnum } from '../dynamic-form/dynamic-form.model';
-
+//TODO: Implement error notice at the input fields template
 @Component({
   selector: 'app-appointment-scheduler-modal',
   templateUrl: './appointment-scheduler-modal.component.html',

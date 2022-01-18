@@ -143,6 +143,7 @@ export class DemoInternalComponent implements OnInit {
   appointmentService: AppointmentSchedulerService;
 
   appointmentModalConfig: AppointmentModalConfigModel = {
+    inputMode: 'New',
     purposes: [
       { value: 'meet_greet', label: 'Meet & Greet', inputs: meetAndGreetInputs },
       { value: 'onboard_parent', label: 'Onboard Parent', inputs: onboardParentInputs },
