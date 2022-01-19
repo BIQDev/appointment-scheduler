@@ -41,7 +41,7 @@ export interface PersonScheduleModel{
     hourEnd: number;
     minutesEnd: number;
     purpose: string;
-    name: string;
+    name: string; //Contact name ( Patient, parent etc )
     purpose_value?: string;
     [x: string]: any;
 }

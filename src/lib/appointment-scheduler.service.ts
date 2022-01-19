@@ -305,12 +305,13 @@ export class AppointmentSchedulerService {
         const newSchedules: Array<PersonScheduleModel> = this.personSchedules
             .filter( el => {
                 return !(el.personId === record.personId
-                    && moment(el.date).isSame(record.date)
+                    && moment(el.date).format('YYYY-MM-DD') === moment(record.date).format('YYYY-MM-DD')
                     && el.hourStart === record.hourStart
                     && el.minutesStart === record.minutesStart
                     && el.hourEnd === record.hourEnd
                     && el.minutesEnd === record.minutesEnd);
             } );
+        if ( this.personSchedules.length ===  newSchedules.length) console.warn('There was no data deleted');
         this.personSchedules = [...newSchedules];
         this.personSchedulesChange$.next([...newSchedules]);
     }
