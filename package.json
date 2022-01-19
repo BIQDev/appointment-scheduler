@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "export OPENSSL_CONF=/dev/null && ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:lib": "ng-packagr -c ./tsconfig.json -p src/lib/package.json"
@@ -53,6 +53,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "karma-phantomjs-launcher": "^1.0.4",
     "ng-packagr": "^5.1.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",

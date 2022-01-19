@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppointmentSchedulerService } from '../appointment-scheduler.service';
+import { StrReplacePipe } from '../pipes/str-replace.pipe';
 
 import { HoursPanelComponent } from './hours-panel.component';
 
@@ -8,7 +10,8 @@ describe('HoursPanelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HoursPanelComponent ]
+      declarations: [ HoursPanelComponent, StrReplacePipe ],
+      providers: [AppointmentSchedulerService]
     })
     .compileComponents();
   }));

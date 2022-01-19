@@ -1,4 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AppointmentSchedulerService } from '../appointment-scheduler.service';
+import { HoursPanelComponent } from '../hours-panel/hours-panel.component';
+import { PersonAppointmentComponent } from '../person-appointment/person-appointment.component';
 
 import { AppointmentSchedulerComponent } from './appointment-scheduler.component';
 
@@ -8,7 +12,9 @@ describe('AppointmentSchedulerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppointmentSchedulerComponent ]
+      imports: [FontAwesomeModule],
+      declarations: [ AppointmentSchedulerComponent, HoursPanelComponent, PersonAppointmentComponent ],
+      providers: [AppointmentSchedulerService]
     })
     .compileComponents();
   }));

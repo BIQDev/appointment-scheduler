@@ -1,8 +1,8 @@
-import { JsonSerializePipe } from './json-serialize.pipe';
+import { BiqJsonSerializePipe } from './json-serialize.pipe';
 
 describe('JsonSerializePipe', () => {
   it('create an instance', () => {
-    const pipe = new JsonSerializePipe();
+    const pipe = new BiqJsonSerializePipe();
     expect(pipe).toBeTruthy();
   });
 });
