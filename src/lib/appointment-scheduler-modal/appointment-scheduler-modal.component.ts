@@ -21,6 +21,8 @@ export class AppointmentSchedulerModalComponent implements OnInit {
     formValues: {},
   };
 
+  submitBtnText: string = 'Send Invite';
+
   formAppointment = this.fb.group({
     purpose: [null, [Validators.required]],
     date: ['', [Validators.required]],
@@ -62,10 +64,12 @@ export class AppointmentSchedulerModalComponent implements OnInit {
       }
       setTimeout(() => {
         for ( let key in this.list.formValues ) {
+
           if ( key === 'purpose' ) continue;
-          const formControl = this.formAppointment.get(key);
-          if (formControl)
-            formControl.setValue(this.list.formValues[key]);
+
+          if ( this.formAppointment.contains(key) )
+            this.formAppointment.get(key).setValue(this.list.formValues[key]);
+            
         }
       }, 200);
     }
