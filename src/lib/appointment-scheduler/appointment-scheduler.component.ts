@@ -45,9 +45,9 @@ export class AppointmentSchedulerComponent implements OnInit, OnDestroy {
 
     if (this.service.getConfig().personAllShow) {
       this.personSelected = null;
-    } else {
+    }/*  else {
       this.personSelected = this.service.personList[0].id;
-    }
+    } */
 
     this.service.setModalConfig(this.appointmentModalConfig);
 
@@ -59,7 +59,12 @@ export class AppointmentSchedulerComponent implements OnInit, OnDestroy {
 
     this.service.personListFitered$
       .pipe( takeUntil(this.stop$) )
-      .subscribe( () => this.cdr.detectChanges())
+      .subscribe( res => {
+        if ( res.length && res.length > 0 ) {
+          this.personSelected = biqHelper.JSON.pathValueGet(res[0], 'id', undefined);
+        }
+        this.cdr.detectChanges();
+      })
 
   }
 
